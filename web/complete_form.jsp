@@ -10,11 +10,12 @@
 <%@page import="java.sql.*"%>
 <%@page import="javax.servlet.http.HttpSession"%>
 <%@page import="constants.DatabaseLogin" %>
+<%@page import="constants.Constants" %>
 
 <%
     try {
     Class.forName("com.mysql.jdbc.Driver").newInstance();
-    String url="jdbc:mysql://localhost:3306/Users";
+    String url="jdbc:mysql://localhost:3306/" + Constants.DB_NAME;
     try {
         DatabaseLogin connection = new DatabaseLogin();
         Connection con = DriverManager.getConnection(url, connection.getUser(), connection.getPassword());
@@ -34,7 +35,7 @@
         /*if (filePart!=null) {
             inputStream = filePart.getInputStream();
         }*/
-        PreparedStatement ps=con.prepareStatement("UPDATE Users SET FName=?, MName=?, LName=?, Status=? WHERE username=? AND email=?");
+        PreparedStatement ps=con.prepareStatement("UPDATE " + Constants.DB_TABLE_USER + " SET FName=?, MName=?, LName=?, Status=? WHERE username=? AND email=?");
         ps.setString(1, fname);
         ps.setString(2, mname);
         ps.setString(3, lname);

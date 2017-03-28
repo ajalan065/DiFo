@@ -4,11 +4,12 @@
 <%@page import="java.sql.*"%>
 <%@page import="javax.servlet.http.HttpSession"%>
 <%@page import="constants.DatabaseLogin" %>
+<%@page import="constants.Constants" %>
 
 <% 
   try {
     Class.forName("com.mysql.jdbc.Driver").newInstance();
-    String url="jdbc:mysql://localhost:3306/Users";
+    String url="jdbc:mysql://localhost:3306/" + Constants.DB_NAME;
     try {
         DatabaseLogin connection = new DatabaseLogin();
         Connection con = DriverManager.getConnection(url, connection.getUser(), connection.getPassword());
@@ -18,7 +19,7 @@
         String password = request.getParameter("password");
         session.setAttribute("user_email", email);
         session.setAttribute("user_name", name);
-        String query = "SELECT * FROM Users WHERE username='" + name + "' OR email='" + email + "'";
+        String query = "SELECT * FROM " + Constants.DB_TABLE_USER + " WHERE username='" + name + "' OR email='" + email + "'";
         PreparedStatement s = con.prepareStatement(query);
 
         ResultSet result = s.executeQuery();
@@ -33,7 +34,7 @@
             out.println("</script>");
         }
         else {
-            PreparedStatement ps=con.prepareStatement("insert into Users(username, email, password) values(?,?,?)");
+            PreparedStatement ps=con.prepareStatement("insert into " + Constants.DB_TABLE_USER + "(username, email, password) values(?,?,?)");
                     ps.setString(1, name);
                     ps.setString(2, email);
                     ps.setString(3, password);

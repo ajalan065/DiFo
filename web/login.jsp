@@ -9,6 +9,7 @@
 <%@page import="java.sql.*"%>
 <%@page import="javax.servlet.http.HttpSession"%>
 <%@page import="constants.DatabaseLogin" %>
+<%@page import="constants.Constants" %>
 
 <%
     //String name=request.getParameter("username");
@@ -23,17 +24,17 @@
     
     try {
     Class.forName("com.mysql.jdbc.Driver").newInstance();
-    String url="jdbc:mysql://localhost:3306/Users";
+    String url="jdbc:mysql://localhost:3306/" + Constants.DB_NAME;
     try {
         DatabaseLogin connection = new DatabaseLogin();
         Connection con = DriverManager.getConnection(url, connection.getUser(), connection.getPassword());
         
-        String login="SELECT * from Users WHERE email='"+email+"' AND password='"+password+"'";
+        String login="SELECT * from " + Constants.DB_TABLE_USER + " WHERE email='"+email+"' AND password='"+password+"'";
         PreparedStatement log=con.prepareStatement(login);
         ResultSet result=log.executeQuery();
         
         if(result.next()) {
-        String q1="SELECT FName from Users WHERE email='"+email+"'";
+        String q1="SELECT FName from " + Constants.DB_TABLE_USER + " WHERE email='"+email+"'";
         PreparedStatement ps1=con.prepareStatement(q1);
         
         ResultSet res = ps1.executeQuery();
@@ -44,7 +45,7 @@
         }
         
         //for middle name
-        String q2="SELECT MName from Users WHERE email='"+email+"'";
+        String q2="SELECT MName from " + Constants.DB_TABLE_USER + " WHERE email='"+email+"'";
         PreparedStatement ps2=con.prepareStatement(q2);
         
         ResultSet res2 = ps2.executeQuery();
@@ -55,7 +56,7 @@
         }
         
         //for last name
-        String q3="SELECT LName from Users WHERE email='"+email+"'";
+        String q3="SELECT LName from " + Constants.DB_TABLE_USER + " WHERE email='"+email+"'";
         PreparedStatement ps3=con.prepareStatement(q3);
         
         ResultSet res3 = ps3.executeQuery();
@@ -66,7 +67,7 @@
         }
         
         // for username
-        String q4="SELECT username from Users WHERE email='"+email+"'";
+        String q4="SELECT username from " + Constants.DB_TABLE_USER + " WHERE email='"+email+"'";
         PreparedStatement ps4=con.prepareStatement(q4);
         
         ResultSet res4 = ps4.executeQuery();
@@ -77,7 +78,7 @@
         }
         
         // for status
-        String q5="SELECT Status from Users WHERE email='"+email+"'";
+        String q5="SELECT Status from " + Constants.DB_TABLE_USER + " WHERE email='"+email+"'";
         PreparedStatement ps5=con.prepareStatement(q5);
         
         ResultSet res5 = ps5.executeQuery();
