@@ -8,6 +8,8 @@
 <%@page import="java.lang.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="javax.servlet.http.HttpSession"%>
+<%@page import="constants.DatabaseLogin" %>
+
 <%
     //String name=request.getParameter("username");
     String email=request.getParameter("email");
@@ -23,7 +25,8 @@
     Class.forName("com.mysql.jdbc.Driver").newInstance();
     String url="jdbc:mysql://localhost:3306/Users";
     try {
-        Connection con = DriverManager.getConnection(url, "root", "ajalan065");
+        DatabaseLogin connection = new DatabaseLogin();
+        Connection con = DriverManager.getConnection(url, connection.getUser(), connection.getPassword());
         
         String login="SELECT * from Users WHERE email='"+email+"' AND password='"+password+"'";
         PreparedStatement log=con.prepareStatement(login);

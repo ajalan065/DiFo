@@ -9,13 +9,16 @@
 <%@page import="java.lang.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="javax.servlet.http.HttpSession"%>
+<%@page import="constants.DatabaseLogin" %>
 
 <%
     try {
     Class.forName("com.mysql.jdbc.Driver").newInstance();
     String url="jdbc:mysql://localhost:3306/Users";
     try {
-        Connection con = DriverManager.getConnection(url, "root", "ajalan065");
+        DatabaseLogin connection = new DatabaseLogin();
+        Connection con = DriverManager.getConnection(url, connection.getUser(), connection.getPassword());
+        
         String fname=request.getParameter("fname");
         String lname=request.getParameter("lname");
         String mname=request.getParameter("mname");
