@@ -3,56 +3,59 @@
 <%@page import="java.lang.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="javax.servlet.http.HttpSession"%>
+<%@page import="constants.DatabaseLogin" %>
 
 <% 
   try {
     Class.forName("com.mysql.jdbc.Driver").newInstance();
     String url="jdbc:mysql://localhost:3306/Users";
     try {
-    Connection con = DriverManager.getConnection(url, "root", "ajalan065");
-    String name=request.getParameter("username");
-    String email=request.getParameter("email");
-    String password = request.getParameter("password");
-    session.setAttribute("user_email", email);
-    session.setAttribute("user_name", name);
-    String query = "SELECT * FROM Users WHERE username='" + name + "' OR email='" + email + "'";
-    PreparedStatement s = con.prepareStatement(query);
-    
-    ResultSet result = s.executeQuery();
-    
-    if (result.next()) {
-        out.println("<script type=\"text/javascript\">");
-        out.println("alert('Username or email exists');");
-        out.println("</script>");
-        request.getSession().invalidate();
-        out.println("<script type=\"text/javascript\">");
-        out.println("location='index.jsp';");
-        out.println("</script>");
-    }
-    else {
-        PreparedStatement ps=con.prepareStatement("insert into Users(username, email, password) values(?,?,?)");
-        	ps.setString(1, name);
-        	ps.setString(2, email);
-        	ps.setString(3, password);
-        	int i = ps.executeUpdate();
+        DatabaseLogin connection = new DatabaseLogin();
+        Connection con = DriverManager.getConnection(url, connection.getUser(), connection.getPassword());
+        
+        String name=request.getParameter("username");
+        String email=request.getParameter("email");
+        String password = request.getParameter("password");
+        session.setAttribute("user_email", email);
+        session.setAttribute("user_name", name);
+        String query = "SELECT * FROM Users WHERE username='" + name + "' OR email='" + email + "'";
+        PreparedStatement s = con.prepareStatement(query);
 
-        	if (i>0) {
-        		out.println("<script type=\"text/javascript\">");
-                        out.println("alert('You are successfully registered');");
-                        out.println("</script>");
-                        response.sendRedirect("edit_profile.jsp");
-                        
+        ResultSet result = s.executeQuery();
+    
+        if (result.next()) {
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Username or email exists');");
+            out.println("</script>");
+            request.getSession().invalidate();
+            out.println("<script type=\"text/javascript\">");
+            out.println("location='index.jsp';");
+            out.println("</script>");
+        }
+        else {
+            PreparedStatement ps=con.prepareStatement("insert into Users(username, email, password) values(?,?,?)");
+                    ps.setString(1, name);
+                    ps.setString(2, email);
+                    ps.setString(3, password);
+                    int i = ps.executeUpdate();
 
-        		//Use JOptions instead to display the above message.
-        	}
-        	else {
-        	out.println("Could not register.. Try again!!");
-        	}
-    }
+                    if (i>0) {
+                            out.println("<script type=\"text/javascript\">");
+                            out.println("alert('You are successfully registered');");
+                            out.println("</script>");
+                            response.sendRedirect("edit_profile.jsp");
+
+
+                            //Use JOptions instead to display the above message.
+                    }
+                    else {
+                    out.println("Could not register.. Try again!!");
+                    }
+        }
     }
     catch(Exception ex) {
         ex.printStackTrace();
-        
+
     }
 
   }
