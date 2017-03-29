@@ -64,9 +64,11 @@
     	<!-- Nav tabs -->
     	<ul class="nav nav-tabs" role="tablist" style="float: right;">
       		<li role="presentation"><a href="#" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-      		<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">About Us</a></li>
-      		<li role="presentation"><a href="http://oopadai.com/packages.php" aria-controls="messages" role="tab" data-toggle="tab">Packages</a></li>
-      		<li role="presentation"><a href="http://oopadai.com/coming.php" aria-controls="settings" role="tab" data-toggle="tab">Offerzone</a></li>
+      		<li role="presentation"><a href="http://oopadai.com/packages.php" aria-controls="messages" role="tab" data-toggle="tab">Questions</a></li>
+      		<li role="presentation"><a href="chat.jsp" aria-controls="settings" role="tab" data-toggle="tab">Chat</a></li>
+                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Users</a></li>
+                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">About Us</a></li>
                 <li><button onclick="logout();">Logout</button></li>
     	</ul>
   	</div>
