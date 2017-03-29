@@ -89,7 +89,7 @@
                 
         }
         out.println("<script type=\"text/javascript\">");
-        out.println("location='edit_profile.jsp';");
+        out.println("location='chat.jsp';");
         out.println("</script>");
         }
         else {
