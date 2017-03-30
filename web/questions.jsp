@@ -40,11 +40,11 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist" style="float: right;">
                     <li role="presentation"><a href="index.jsp" aria-controls="home" role="tab" >Home</a></li>
-                    <li role="presentation"><a href="#" aria-controls="messages" role="tab" data-toggle="tab">Questions</a></li>
+                    <li role="presentation"><a href="#" aria-controls="messages" role="tab" >Questions</a></li>
                     <li role="presentation"><a href="chat.jsp" aria-controls="settings" role="tab" >Chat</a></li>
-                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Users</a></li>
-                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">About Us</a></li>
+                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" >Users</a></li>
+                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" >Profile</a></li>
+                    <li role="presentation"><a href="aboutus.jsp" aria-controls="profile" role="tab" >About Us</a></li>
                     <li><button onclick="logout();">Logout</button></li>
             </ul>
   	</div>
