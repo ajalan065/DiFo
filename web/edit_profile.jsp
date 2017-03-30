@@ -14,7 +14,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Edit Profile</title>
+        <title>Edit Profile | DiFo</title>
         <style type="text/css">
     	<%@include file="assets/bootstrap/css/bootstrap.min.css" %>
     	<%@include file="assets/css/form-elements.css" %>
@@ -60,15 +60,15 @@
             
         %>
         <div class="my-topnav my-card my-top my-light-grey" id="head">
-    	<a href="#" >Discussion Forum</a>
+    	<a href="index.jsp" >DiFo</a>
     	<!-- Nav tabs -->
     	<ul class="nav nav-tabs" role="tablist" style="float: right;">
-      		<li role="presentation"><a href="#" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-      		<li role="presentation"><a href="http://oopadai.com/packages.php" aria-controls="messages" role="tab" data-toggle="tab">Questions</a></li>
-      		<li role="presentation"><a href="chat.jsp" aria-controls="settings" role="tab" data-toggle="tab">Chat</a></li>
-                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Users</a></li>
-                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">About Us</a></li>
+      		<li role="presentation"><a href="index.jsp" aria-controls="home" role="tab" >Home</a></li>
+      		<li role="presentation"><a href="questions.jsp" aria-controls="messages" role="tab" >Questions</a></li>
+      		<li role="presentation"><a href="chat.jsp" aria-controls="settings" role="tab" >Chat</a></li>
+                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" >Users</a></li>
+                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" >Profile</a></li>
+                <li role="presentation"><a href="aboutus.jsp" aria-controls="profile" role="tab" >About Us</a></li>
                 <li><button onclick="logout();">Logout</button></li>
     	</ul>
   	</div>
