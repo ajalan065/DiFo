@@ -100,7 +100,7 @@
 
 					<p class="fieldset">
 						<input type="checkbox" id="accept-terms" required>
-						<label for="accept-terms">I agree to the <a href="#0">Terms</a></label>
+						<label for="accept-terms">I agree to the <a target="_blank" href="terms.html">Terms</a></label>
 					</p>
 
 					<p class="fieldset">
