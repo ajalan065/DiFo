@@ -32,6 +32,12 @@
 	<script src="assets/js/jquery.backstretch.min.js"></script>
 	<script src="assets/js/scripts.js"></script>
 	<script src="js/modernizr.js"></script>
+        
+        <style type="text/css">
+            #ask-question {
+                text-align:center;
+            }
+        </style>
     </head>
     <body>
         
@@ -50,6 +56,10 @@
   	</div>
         
         <div id="all-questions">
+            <div id="ask-question">
+                <a href="addquestion.jsp" >Add Question</a>
+            </div>
+            
             <div id="question">
                 Many more follow .. Right ?
             </div>
