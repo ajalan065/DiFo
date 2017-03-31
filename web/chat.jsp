@@ -74,7 +74,10 @@
     </head>
 
     <body>
-
+        <!--<div class="my-topnav my-card my-top my-light-grey" id="head">-->
+        <a href="index.jsp" aria-controls="home" role="tab">Home</a>&nbsp;&nbsp;
+        <a href="questions.jsp" aria-controls="messages" role="tab">Questions</a>&nbsp;&nbsp;
+        <a href="#profile" aria-controls="profile" role="tab">Profile</a>&nbsp;&nbsp;
         <div id="wrapper">
             <div id="menu">
                 <p class="welcome">Welcome, <% out.println(name);%> <b></b></p>
