@@ -78,7 +78,8 @@
         <div id="wrapper">
             <div id="menu">
                 <p class="welcome">Welcome, <% out.println(name);%> <b></b></p>
-                <p class="logout"><a id="exit" href="logout.jsp">Exit Chat</a></p>
+                <p class="home"><a id="home" href="index.jsp">Return to Home</a></p>
+                <p class="logout"><a id="exit" href="logout.jsp">Exit chat & Logout</a></p>
                 <div style="clear:both"></div>
             </div>
 
