@@ -57,7 +57,7 @@
         
         <div id="all-questions">
             <div id="ask-question">
-                <a href="addquestion.jsp" >Add Question</a>
+                <a href="askquestion.html" >Add Question</a>
             </div>
             
             <div id="question">

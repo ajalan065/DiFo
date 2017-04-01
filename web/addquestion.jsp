@@ -5,40 +5,37 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ask Question | DiFo</title>
-        
-        <style type="text/css">
-            body {
-            font:12px arial;
-            color: #222;
-            text-align:center;
-            padding:35px; }
+<%@page import="java.lang.*"%>
+<%@page import="java.sql.*"%>
+<%@page import="javax.servlet.http.HttpSession"%>
+<%@page import="constants.DatabaseLogin" %>
+<%@page import="constants.Constants" %>
+<%@page import="DBControl.DBEngine" %>
+<%@page import="DBControl.QuestionDAO" %>
+
+<%
+    String head = request.getParameter("qhead");
+    String body = request.getParameter("qbody");
+    String tags = request.getParameter("qtags");
+    
+    try {
+        DBEngine dbengine = new DBEngine();
+        dbengine.establishConnection();
+        try {
+            Connection con = dbengine.getConnection();
+            QuestionDAO questionDAO = new QuestionDAO(con);
             
-            form {
-                margin: 0;
-                padding: 0;
+            int res = questionDAO.insertQuestion(head, body, "yolo"); // keep dummy username for now 
+            if (res > 0) {
+                response.sendRedirect("questions.jsp");
+            } else  {
+                out.println("Your question was not posted. Please try again!!");
             }
-            
-            input { font:12px arial; }
-            
-        </style>
-    </head>
-    <body>
-        <h1>Ask a Question!</h1>
-        
-        <div id="ask-question">
-            
-            <form name="question" action="SaveQuestion.java" method="post">
-                <input name="qhead" type="text" id="qhead" value="Enter Question" onfocus="if (this.value == 'Enter Question') this.value=''" size="500" />
-                <input name="qbody" type="text" id="qbody" value="Description (Optional)" onfocus="if (this.value == 'Description (Optional)') this.value=''" size="1000" />
-                <input name="qtags" type="text" id="qtags" value="Enter tags (Optional)" onfocus="if (this.value == 'Enter tags (Optional)') this.value=''" size="1000" />
-                <input name="submitques" type="submit"  id="submitques" value="Submit" />
-            </form>
-            
-        </div>
-    </body>
-</html>
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        out.println("Could not connect");
+    }
+%>
