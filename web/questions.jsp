@@ -4,12 +4,16 @@
     Author     : arka
 --%>
 
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.lang.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="javax.servlet.http.HttpSession"%>
 <%@page import="javax.servlet.http.Part" %>
 <%@page import="java.io.*" %>
+<%@page import="DBControl.DBEngine" %>
+<%@page import="DBControl.QuestionDAO" %>
+<%@page import="model.Question" %>
 
 <!DOCTYPE html>
 <html>
@@ -55,18 +59,44 @@
             </ul>
   	</div>
         
+        <%
+            List<Question> questions = null;
+            try {
+                DBEngine dbengine = new DBEngine();
+                dbengine.establishConnection();
+                try {
+                    Connection con = dbengine.getConnection();
+                    QuestionDAO questionDAO = new QuestionDAO(con);
+                    questions = questionDAO.getQuestions();
+                } catch(Exception ex) {
+                    ex.printStackTrace();
+                }
+                dbengine.closeConnection();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        %>
         <div id="all-questions">
             <div id="ask-question">
                 <a href="askquestion.html" >Add Question</a>
             </div>
             
-            <div id="question">
-                Many more follow .. Right ?
-            </div>
-            
-            <div id="question">
-                Or should they ?
-            </div>
+            <table id="question-table">
+                <%
+                    if(questions != null) {
+                        for (Question question : questions) {
+                %>
+                <tr>
+                    <td><%= question.getHead() %></td>
+                    <td><%= question.getBody() %></td>
+                    <td><%= question.getUsername() %></td>
+                    <td><%= question.getTimestamp() %></td>
+                </tr>
+                <%
+                        }
+                    }
+                %>
+            </table>
         </div>
     </body>
 </html>

@@ -6,9 +6,11 @@
 package DBControl;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import constants.Constants;
-import constants.DatabaseLogin;
+import model.Question;
 
 /**
  * Data Access Object for Questions
@@ -46,5 +48,26 @@ public class QuestionDAO {
         
         int res = ps.executeUpdate();
         return res;
+    }
+    
+    /**
+     * Get all questions from database 
+     * @return A list of questions
+     * @throws java.sql.SQLException
+     */
+    public List<Question> getQuestions()throws SQLException {
+        List<Question> questions = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE;
+        PreparedStatement ps = connection.prepareStatement(query);
+        ResultSet rst = ps.executeQuery();
+        
+        while(rst.next()) {
+            Question question = new Question(rst.getInt("id"), 
+                    rst.getString("head"), rst.getString("body"), 
+                    rst.getString("username"), rst.getTimestamp("timestamp"));
+            questions.add(question);
+        }
+        
+        return questions;
     }
 }

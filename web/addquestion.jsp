@@ -34,6 +34,7 @@
         } catch(Exception ex) {
             ex.printStackTrace();
         }
+        dbengine.closeConnection();
     } catch (Exception e) {
         e.printStackTrace();
         out.println("Could not connect");
