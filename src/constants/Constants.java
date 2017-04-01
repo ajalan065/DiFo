@@ -16,4 +16,5 @@ public class Constants {
     public static final String DB_TABLE_QUES = "Questions";
     public static final String DB_TABLE_ANS = "Answers";
     public static final String DB_TABLE_TAG = "Tags";
+    public static final String DB_TABLE_QT = "Questions_Tags";
 }

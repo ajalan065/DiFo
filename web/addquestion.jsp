@@ -12,6 +12,7 @@
 <%@page import="constants.Constants" %>
 <%@page import="DBControl.DBEngine" %>
 <%@page import="DBControl.QuestionDAO" %>
+<%@page import="DBControl.TagDAO" %>
 
 <%
     String head = request.getParameter("qhead");
@@ -24,8 +25,10 @@
         try {
             Connection con = dbengine.getConnection();
             QuestionDAO questionDAO = new QuestionDAO(con);
+            TagDAO tagDAO = new TagDAO(con);
             
-            int res = questionDAO.insertQuestion(head, body, "yolo"); // keep dummy username for now 
+            int res = questionDAO.insertQuestion(head, body, "yolo"); // keep dummy username for now
+            tagDAO.insertTag(tags);
             if (res > 0) {
                 response.sendRedirect("questions.jsp");
             } else  {

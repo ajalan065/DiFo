@@ -70,4 +70,16 @@ public class QuestionDAO {
         
         return questions;
     }
+    
+    /**
+     * Get the id of the last row inserted
+     * @return
+     * @throws SQLException 
+     */
+    public int getLastInsertId()throws SQLException {
+        String query = "SELECT MAX(id) AS id FROM " + TABLE;
+        PreparedStatement ps = connection.prepareStatement(query);
+        ResultSet rst = ps.executeQuery();
+        return rst.getInt("id");
+    }
 }
