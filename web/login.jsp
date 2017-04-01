@@ -10,6 +10,7 @@
 <%@page import="javax.servlet.http.HttpSession"%>
 <%@page import="constants.DatabaseLogin" %>
 <%@page import="constants.Constants" %>
+<%@page import="DBControl.DBEngine" %>
 
 <%
     //String name=request.getParameter("username");
@@ -23,11 +24,10 @@
     session.setAttribute("user_status", status);*/
     
     try {
-    Class.forName("com.mysql.jdbc.Driver").newInstance();
-    String url="jdbc:mysql://localhost:3306/" + Constants.DB_NAME;
+    DBEngine dbengine = new DBEngine();
+    dbengine.establishConnection();
     try {
-        DatabaseLogin connection = new DatabaseLogin();
-        Connection con = DriverManager.getConnection(url, connection.getUser(), connection.getPassword());
+        Connection con = dbengine.getConnection();
         
         String login="SELECT * from " + Constants.DB_TABLE_USER + " WHERE email='"+email+"' AND password='"+password+"'";
         PreparedStatement log=con.prepareStatement(login);
