@@ -1,5 +1,6 @@
 <html>
 <head>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
 	<style type="text/css">
     	<%@include file="assets/bootstrap/css/bootstrap.min.css" %>
     	<%@include file="assets/css/form-elements.css" %>
@@ -29,9 +30,9 @@
       		<li role="presentation"><a href="questions.jsp" aria-controls="messages" role="tab" >Questions</a></li>
       		<li role="presentation"><a href="chat.jsp" aria-controls="settings" role="tab" >Chat</a></li>
                 <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" >Users</a></li>
-                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" >Profile</a></li>
+                <li role="presentation"><a href="showprofile.jsp" aria-controls="profile" role="tab" >Profile</a></li>
                 <li role="presentation"><a href="aboutus.jsp" aria-controls="profile" role="tab" >About Us</a></li>
-      		<li><div class="main-nav"><a class="cd-signup" href="#0" data-modal-id="modal-register"><i class="fa fa-user-plus fa-lg"></i></a></div></li>
+      		<li><div class="main-nav"><a class="cd-signup" href="#0" data-modal-id="modal-register"><i class="fa fa-user-plus fa-lg">Register</i></a></div></li>
     	</ul>
   	</div>
 
