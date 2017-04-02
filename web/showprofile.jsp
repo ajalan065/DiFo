@@ -19,6 +19,20 @@
     	<%@include file="css/style.css" %>
     	<%@include file="css/reset.css" %>
     	<%@include file="font-awesome.min.css" %>
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
 	</style>
         
 	<script src="assets/js/jquery-1.11.1.min.js"></script>
@@ -50,6 +64,11 @@
             String mname=(String)session.getAttribute("m_name");
             String lname=(String)session.getAttribute("l_name");
             String status=(String)session.getAttribute("user_status");
+            String text;
+            if(name==null)
+                text="Login";
+            else
+                text="Logout";
         %>
     </head>
     <body>
@@ -60,10 +79,59 @@
       		<li role="presentation"><a href="index.jsp" aria-controls="home" role="tab" >Home</a></li>
       		<li role="presentation"><a href="questions.jsp" aria-controls="messages" role="tab" >Questions</a></li>
       		<li role="presentation"><a href="chat.jsp" aria-controls="settings" role="tab" >Chat</a></li>
-                <li><button class="btn btn-block btn-info" onclick="logout();">Logout</button></li>
+                <li><button onclick="func('<%=text %>');" class="btn btn-block btn-info"><%out.println(text);%></button></li>
     	</ul>
   	</div>
         
+        <div id="id01" class="modal"> <!-- log in form -->
+            <div class="cd-user-modal-container">
+            <form class="cd-form" action="login.jsp" method="post">
+		<p class="fieldset">
+		<label class="image-replace cd-email" for="signin-email">E-mail</label>
+                <input name="email" class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
+		<span class="cd-error-message">Error message here!</span>
+		</p>
+
+		<p class="fieldset">
+		<label class="image-replace cd-password" for="signin-password">Password</label>
+		<input class="full-width has-padding has-border" id="signin-password" type="password"  placeholder="Password" name="password">
+		<a href="#0" class="hide-password">Show</a>
+		<span class="cd-error-message">Error message here!</span>
+		</p>
+
+		<p class="fieldset">
+		<input type="checkbox" id="remember-me" checked>
+		<label for="remember-me">Remember me</label>
+		</p>
+
+                <p class="fieldset">
+		<button class="full-width" id="login_form" onclick="login_form_submit()" type="submit">Login</button>
+		</p>
+            </form>
+				
+            <p class="cd-form-bottom-message"><a href="#0">Forgot your password?</a></p>
+            
+            <div id="cd-reset-password"> <!-- reset password form -->
+				<p class="cd-form-message">Lost your password? Please enter your email address. You will receive a link to create a new password.</p>
+
+				<form class="cd-form">
+					<p class="fieldset">
+						<label class="image-replace cd-email" for="reset-email">E-mail</label>
+						<input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<input class="full-width has-padding" type="submit" value="Reset password">
+					</p>
+				</form>
+
+				<p class="cd-form-bottom-message"><a href="#0">Back to log-in</a></p>
+			</div> <!-- cd-reset-password -->
+			<a href="#0" class="cd-close-form">Close</a>
+            </div>            
+	</div> 
+
             <p><span style="color:black;font-weight: bold">Username:</span><%out.println(name);%></p><br/>
             <p><span style="color:black;font-weight: bold">First Name:</span><%out.println(fname);%></p><br/>
             <p><span style="color:black;font-weight: bold">Middle Name:</span><%out.println(mname);%></p><br/>
@@ -71,10 +139,20 @@
             <p><span style="color:black;font-weight: bold">Email Address:</span><%out.println(email);%></p><br/>
             <p><span style="color:black;font-weight: bold">Status:</span><%out.println(status);%></p><br/>
         
-    </body>
+        
     <script type="text/javascript">
-        function logout() {
-            window.location="logout.jsp";
+        function func(text) {
+           if(text==="Logout")
+                window.location="logout.jsp";
+           else if(text==="Login")
+                document.getElementById('id01').style.display='block';
         }
+        var modal = document.getElementById('id01');
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        
     </script>
 </html>
