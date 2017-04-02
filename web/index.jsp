@@ -87,9 +87,10 @@
 
 					<p class="fieldset">
 						<label class="image-replace cd-password" for="signup-password">Password</label>
-						<input class="full-width has-padding has-border" id="signup-password" type="password"  placeholder="Password" name="password" required>
+						<input class="full-width has-padding has-border" id="signup-password" type="password"  placeholder="Password" name="password" required onkeyup="return password_check();">
 						<a href="#0" class="hide-password">Show</a>
 						<span class="cd-error-message">Error message here!</span>
+                                                <span id="check">Type Password</span>
 					</p>
                                         
                                         <p class="fieldset">
@@ -138,112 +139,42 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="js/main.js"></script>
 	<script type="text/javascript">
-  function reg_form_submit() {
-    document.getElementById("reg_form").submit();
-   } 
-   function login_form_submit() {
-   	document.getElementById("login_form").submit();
-   }
-   function check() {
-        if (document.getElementById('signup-password-confirm').value==document.getElementById('signup-password').value){
-        }
-        else {
-            alert("Password do not match");
-            document.getElementById('signup-password-confirm').value='';
-            document.getElementById('signup-password').value='';
+            function reg_form_submit() {
+              document.getElementById("reg_form").submit();
+            } 
+            function login_form_submit() {
+                  document.getElementById("login_form").submit();
+            }
+            function check() {
+                if (document.getElementById('signup-password-confirm').value==document.getElementById('signup-password').value){
+                }
+                else {
+                    alert("Password do not match");
+                    document.getElementById('signup-password-confirm').value='';
+                    document.getElementById('signup-password').value='';
 
 
-        }
-   }
-  </script>
-
-
-  <!-- MODAL -->
-     <!--<div class="modal fade" id="modal-register" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
-         <div class="modal-dialog">
-          <div class="modal-content">
-
-           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">
-             <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-         </button>
-         <ul class="nav nav-justified nav-tabs" role="tablist">
-         	<li><a class="cd-signin" href="#">Login</a></li>
-        	<li><a class="cd-signup" href="#">Register</a></li>
-         </ul>
-        <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation">
-         <h3 class="modal-title" id="modal-register-label" style="color: #fd625e; font-weight: bold; font-family: Verdana;">Login</h3>
-         </li>
-         <li role="presentation">
-         <h3 class="modal-title" id="modal-register-label" style="color: #fd625e; font-weight: bold; font-family: Verdana;">Register</h3>
-         </li>
-         </ul>
-     </div>-->
-
-
-     <!--Register -->
-    <!-- <div id="register">
-     <div class="modal-body">
-
-           <form action="register.php" method="post" class="registration-form" enctype="multipart/form-data">
-              <div class="form-group">
-                 <label class="sr-only" for="form-first-name">First name</label>
-                 <input type="text" name="form-first-name" placeholder="First name..." class="form-first-name form-control" id="form-first-name">
-             </div>
-             <div class="form-group">
-              <label class="sr-only" for="form-last-name">Last name</label>
-              <input type="text" name="form-last-name" placeholder="Last name..." class="form-last-name form-control" id="form-last-name">
-          </div>
-          <div class="form-group">
-              <label class="sr-only" for="form-email">Email</label>
-              <input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
-          </div>
-          <div class="form-group">
-              <label class="sr-only" for="form-password">Password</label>
-              <input type="password" name="form-password" placeholder="Enter Password" class="form-password form-control" id="form-password">
-          </div>
-          <div class="form-group">
-              <label class="sr-only" for="form-password"> Confirm Password</label>
-              <input type="password" name="form-confirm" placeholder="Confirm Password" class="form-confirm form-control" id="form-confirm">
-          </div>
-          <div class="form-group">
-              <label class="sr-only" for="form-about-yourself">About yourself</label>
-              <textarea name="form-about-yourself" placeholder="About yourself..."
-              class="form-about-yourself form-control" id="form-about-yourself" style="overflow: hidden; resize: none;"></textarea>
-          </div>
-		  <div class="form-group">
-              <label class="sr-only" for="form-tags">Specialities</label>
-              <input type="text" name="form-tags" placeholder="Enter Tags like Chemistry, Physics, etc. seperated by a single comma" class="form-tags form-control" id="form-tags" style="overflow: hidden; resize: none;">
-          </div>
-          <div class="form-group">
-            <label class="sr-only" for="form-about-yourself">Upload Picture</label>
-            <input type="file" name="image" id="image" accept="image/*">
-          </div>
-          <button type="submit" class="btn">Sign me up!</button>
-      </form>
-  </div>
-</div>-->
-
-
-	<!--Login-->
-	<!--<div id="login">
-     <div class="modal-body">
-
-           <form action="register.php" method="post" class="registration-form" enctype="multipart/form-data">
-              
-          <div class="form-group">
-              <label class="sr-only" for="form-email">Email</label>
-              <input type="text" name="form-first-name" placeholder="NickName" class="form-first-name form-control" id="form-first-name">
-          </div>
-          <div class="form-group">
-              <label class="sr-only" for="form-password">Password</label>
-              <input type="password" name="form-password" placeholder="Enter Password" class="form-password form-control" id="form-password">
-          </div>
-          <button type="submit" class="btn">Login!</button>
-      </form>
-  </div>
-</div>
--->
+                }
+            }
+            
+            function password_check() {
+                var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z]) (?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+                var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+                var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+                var pwd = document.getElementById("signup-password");
+                
+                if (pwd.value.length==0) {
+                    document.getElementById('check').innerHTML = 'Type Password';
+                } else if (false == enoughRegex.test(pwd.value)) {
+                    document.getElementById('check').innerHTML = 'More Characters';
+                } else if (strongRegex.test(pwd.value)) {
+                    document.getElementById('check').innerHTML = '<b><span style="color:green">Strong!</span>';
+                } else if (mediumRegex.test(pwd.value)) {
+                    document.getElementById('check').innerHTML = '</b><b><span style="color:orange">Medium!</span>';
+                } else {
+                    document.getElementById('check').innerHTML = '</b><b><span style="color:red">Weak!</span>';
+                }
+            }
+        </script>
 </body>
 </html>
