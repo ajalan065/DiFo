@@ -90,7 +90,7 @@
 						<input class="full-width has-padding has-border" id="signup-password" type="password"  placeholder="Password" name="password" required onkeyup="return password_check();">
 						<a href="#0" class="hide-password">Show</a>
 						<span class="cd-error-message">Error message here!</span>
-                                                <span id="check" hidden="true">Type Password</span>
+                                                <span id="check">Type Password</span>
 					</p>
                                         
                                         <p class="fieldset">
