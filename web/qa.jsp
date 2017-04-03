@@ -83,7 +83,7 @@
             }
         %>
         
-        <div id="wrapper">
+        <div id="question-wrapper">
             <div id="question-head">
                 <%= question.getHead() %>
             </div>
@@ -99,6 +99,19 @@
             <div id="timestamp">
                 <%= question.getTimestamp() %>
             </div>
+        </div>
+        
+        <div id="answers-wrapper">
+            <div>YOLO ANS 1</div>
+            <div>YOLO ANS 2</div>
+            <div>YOLO ANS 3</div>    
+        </div>   
+        
+        <div id="write-answer">
+            <form name="message" action="post_answer.jsp" method="post">
+                <input name="usermsg" type="text" id="usermsg" size="100" />
+                <input name="submitmsg" type="submit"  id="submitmsg" value="Answer" />
+            </form>
         </div>
     </body>
 </html>
