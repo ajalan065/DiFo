@@ -161,10 +161,10 @@ header[role=banner]::after {
   .main-nav a.cd-signin, .main-nav a.cd-signup {
     padding: .6em 1em;
     border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 50em;
+    border-radius: 0em;
   }
   .main-nav a.cd-signup {
-    background: #2f889a;
+    background: lightcoral;
     border: none;
   }
 }
