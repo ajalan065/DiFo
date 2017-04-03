@@ -4,6 +4,8 @@
     Author     : arka
 --%>
 
+<%@page import="DBControl.AnswerDAO"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.lang.*"%>
 <%@page import="java.sql.*"%>
@@ -13,6 +15,7 @@
 <%@page import="DBControl.DBEngine" %>
 <%@page import="DBControl.QuestionDAO" %>
 <%@page import="model.Question" %>
+<%@page import="model.Answer" %>
 
 <!DOCTYPE html>
 <html>
@@ -45,6 +48,14 @@
                 margin: 0 0 35px 0; 
                 text-shadow: 0px 1px 0px #f2f2f2;
             }
+            
+            #answer-start {
+                font-size: 20px; 
+                color: #445668; 
+                text-align: center; 
+                margin: 0 0 35px 0; 
+                text-shadow: 0px 1px 0px #f2f2f2;
+            }
         </style>
     </head>
     <body>
@@ -65,6 +76,7 @@
         
         <%
             Question question = null;
+            List<Answer> answers = null;
             try {
                 DBEngine dbengine = new DBEngine();
                 dbengine.establishConnection();
@@ -74,6 +86,10 @@
                     String param = request.getParameter("param");
                     int id = Integer.parseInt(param);
                     question = questionDAO.getQuestionById(id);
+                    session.setAttribute("current_question", id);
+                    
+                    AnswerDAO answerDAO = new AnswerDAO(con);
+                    answers = answerDAO.getAnswersByQid(id);
                 } catch(Exception ex) {
                     ex.printStackTrace();
                 }
@@ -101,16 +117,29 @@
             </div>
         </div>
         
+        <div id="answer-start"> Answers </div>
+
         <div id="answers-wrapper">
-            <div>YOLO ANS 1</div>
-            <div>YOLO ANS 2</div>
-            <div>YOLO ANS 3</div>    
+            <%
+                if(answers != null) {
+                    for (Answer answer : answers) {
+            %>
+            <div id="answer" >
+                <div id="answer-body"><%= answer.getBody() %></div>
+                <div id="answer-username"><%= answer.getUsername() %></div>
+                <div id="answer-timestamp"><%= answer.getTimestamp() %></div>
+            </div>
+            <%
+                    }
+                }
+            %>
+              
         </div>   
         
         <div id="write-answer">
-            <form name="message" action="post_answer.jsp" method="post">
-                <input name="usermsg" type="text" id="usermsg" size="100" />
-                <input name="submitmsg" type="submit"  id="submitmsg" value="Answer" />
+            <form name="answer-form" action="addanswer.jsp" method="post">
+                <input name="answer-body" type="text" id="answer-body" size="100" />
+                <input name="submit_answer" type="submit"  id="submit-answer" value="Answer" />
             </form>
         </div>
     </body>
