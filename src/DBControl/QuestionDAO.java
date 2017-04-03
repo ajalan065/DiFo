@@ -72,6 +72,27 @@ public class QuestionDAO {
     }
     
     /**
+     * Get question corresponding to the id in parameter
+     * @param id
+     * @return
+     * @throws SQLException 
+     */
+    public Question getQuestionById(int id)throws SQLException {
+        String query = "SELECT * FROM " + TABLE + " WHERE id=?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setInt(1, id);
+        ResultSet rst = ps.executeQuery();
+        Question question = null;
+        if(rst.next()) {
+            question = new Question(rst.getInt("id"), rst.getString("head"), 
+                    rst.getString("body"), rst.getString("username"), 
+                    rst.getTimestamp("timestamp"));
+            return question;
+        }
+        return question;
+    }
+    
+    /**
      * Get the id of the last row inserted
      * @return
      * @throws SQLException 

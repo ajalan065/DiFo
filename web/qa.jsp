@@ -1,10 +1,9 @@
 <%-- 
-    Document   : questions
-    Created on : 30 Mar, 2017, 3:31:52 PM
+    Document   : qa
+    Created on : 3 Apr, 2017, 8:51:54 AM
     Author     : arka
 --%>
 
-<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.lang.*"%>
 <%@page import="java.sql.*"%>
@@ -19,7 +18,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Questions | DiFo</title>
+        <title>Question Thread | DiFo</title>
         
         <style type="text/css">
     	<%@include file="assets/bootstrap/css/bootstrap.min.css" %>
@@ -38,16 +37,15 @@
 	<script src="js/modernizr.js"></script>
         
         <style type="text/css">
-            #ask-question {
-                text-align:center;
+            #question-head {
+                font-size: 20px; 
+                color: #445668; 
+                text-transform: uppercase;
+                text-align: center; 
+                margin: 0 0 35px 0; 
+                text-shadow: 0px 1px 0px #f2f2f2;
             }
         </style>
-        
-        <script type="text/javascript">
-            function open_thread(id) {
-                window.location = "qa.jsp?param=" + id;
-            }
-        </script>
     </head>
     <body>
         
@@ -56,7 +54,7 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist" style="float: right;">
                     <li role="presentation"><a href="index.jsp" aria-controls="home" role="tab" >Home</a></li>
-                    <li role="presentation"><a href="#" aria-controls="messages" role="tab" >Questions</a></li>
+                    <li role="presentation"><a href="questions.jsp" aria-controls="messages" role="tab" >Questions</a></li>
                     <li role="presentation"><a href="chat.jsp" aria-controls="settings" role="tab" >Chat</a></li>
                     <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" >Users</a></li>
                     <li role="presentation"><a href="showprofile.jsp" aria-controls="profile" role="tab" >Profile</a></li>
@@ -66,14 +64,16 @@
   	</div>
         
         <%
-            List<Question> questions = null;
+            Question question = null;
             try {
                 DBEngine dbengine = new DBEngine();
                 dbengine.establishConnection();
                 try {
                     Connection con = dbengine.getConnection();
                     QuestionDAO questionDAO = new QuestionDAO(con);
-                    questions = questionDAO.getQuestions();
+                    String param = request.getParameter("param");
+                    int id = Integer.parseInt(param);
+                    question = questionDAO.getQuestionById(id);
                 } catch(Exception ex) {
                     ex.printStackTrace();
                 }
@@ -82,28 +82,23 @@
                 e.printStackTrace();
             }
         %>
-        <div id="all-questions">
-            <div id="ask-question">
-                <a href="askquestion.html" >Add Question</a>
+        
+        <div id="wrapper">
+            <div id="question-head">
+                <%= question.getHead() %>
             </div>
             
-            <table id="question-table">
-                <%
-                    if(questions != null) {
-                        for (Question question : questions) {
-                            int id = question.getId();
-                %>
-                <tr id="question-tr">
-                    <td onclick="open_thread(<%= id %>)"><%= question.getHead() %></td>
-                    <td><%= question.getBody() %></td>
-                    <td><%= question.getUsername() %></td>
-                    <td><%= question.getTimestamp() %></td>
-                </tr>
-                <%
-                        }
-                    }
-                %>
-            </table>
+            <div id="question-body">
+                <%= question.getBody() %>
+            </div>
+            
+            <div id="username">
+                <%= question.getUsername() %>
+            </div>
+            
+            <div id="timestamp">
+                <%= question.getTimestamp() %>
+            </div>
         </div>
     </body>
 </html>

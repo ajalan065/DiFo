@@ -27,6 +27,10 @@ public class Question {
         this.timestamp = timestamp;
     }
     
+    public int getId() {
+        return this.id;
+    }
+    
     public String getHead() {
         return this.head;
     }
