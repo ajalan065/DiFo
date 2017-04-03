@@ -32,11 +32,7 @@
                 <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" >Users</a></li>
                 <li role="presentation"><a href="showprofile.jsp" aria-controls="profile" role="tab" >Profile</a></li>
                 <li role="presentation"><a href="aboutus.jsp" aria-controls="profile" role="tab" >About Us</a></li>
-<<<<<<< Updated upstream
-      		<li><div class="main-nav"><a class="cd-signup" href="#0" data-modal-id="modal-register"><i class="fa fa-user-plus fa-lg">Register</i></a></div></li>
-=======
                 <li><div class="main-nav"><a class="cd-signup" href="#0" data-modal-id="modal-register">Register</a></div></li>
->>>>>>> Stashed changes
     	</ul>
   	</div>
 
