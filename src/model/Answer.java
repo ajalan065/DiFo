@@ -8,31 +8,27 @@ package model;
 import java.sql.Timestamp;
 
 /**
- * The Question class
+ * The Answer class
  * @author arka
  */
-public class Question {
+public class Answer {
     private int id;
-    private String head;
     private String body;
     private String username;
+    private int qid;
     private Timestamp timestamp;
     
-    public Question(int id, String head, String body, 
-            String username, Timestamp timestamp) {
-        this.body = body;
+    public Answer(int id, String body, String username, int qid, 
+            Timestamp timestamp) {
         this.id = id;
-        this.head = head;
+        this.body = body;
         this.username = username;
+        this.qid = qid;
         this.timestamp = timestamp;
     }
     
     public int getId() {
         return this.id;
-    }
-    
-    public String getHead() {
-        return this.head;
     }
     
     public String getBody() {
@@ -43,12 +39,12 @@ public class Question {
         return this.username;
     }
     
-    public Timestamp getTimestamp() {
-        return this.timestamp;
+    public int getQid() {
+        return this.qid;
     }
     
-    public void setHead(String head) {
-        this.head = head;
+    public Timestamp getTimestamp() {
+        return this.timestamp;
     }
     
     public void setBody(String body) {

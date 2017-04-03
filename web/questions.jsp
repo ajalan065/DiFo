@@ -64,6 +64,12 @@
                 text-align:center;
             }
         </style>
+        
+        <script type="text/javascript">
+            function open_thread(id) {
+                window.location = "qa.jsp?param=" + id;
+            }
+        </script>
     </head>
     <body>
         
@@ -156,9 +162,10 @@
                 <%
                     if(questions != null) {
                         for (Question question : questions) {
+                            int id = question.getId();
                 %>
-                <tr>
-                    <td><%= question.getHead() %></td>
+                <tr id="question-tr">
+                    <td onclick="open_thread(<%= id %>)"><%= question.getHead() %></td>
                     <td><%= question.getBody() %></td>
                     <td><%= question.getUsername() %></td>
                     <td><%= question.getTimestamp() %></td>
