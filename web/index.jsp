@@ -32,7 +32,7 @@
                 <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" >Users</a></li>
                 <li role="presentation"><a href="showprofile.jsp" aria-controls="profile" role="tab" >Profile</a></li>
                 <li role="presentation"><a href="aboutus.jsp" aria-controls="profile" role="tab" >About Us</a></li>
-      		<li><div class="main-nav"><a class="cd-signup" href="#0" data-modal-id="modal-register"><i class="fa fa-user-plus fa-lg">Register</i></a></div></li>
+                <li><div class="main-nav"><a class="cd-signup" href="#0" data-modal-id="modal-register">Register</a></div></li>
     	</ul>
   	</div>
 
@@ -90,7 +90,7 @@
 						<input class="full-width has-padding has-border" id="signup-password" type="password"  placeholder="Password" name="password" required onkeyup="return password_check();">
 						<a href="#0" class="hide-password">Show</a>
 						<span class="cd-error-message">Error message here!</span>
-                                                <span id="check">Type Password</span>
+                                                <span id="check" hidden="true">Type Password</span>
 					</p>
                                         
                                         <p class="fieldset">
