@@ -18,7 +18,7 @@
     	<%@include file="style.css" %>
     	<%@include file="css/style.css" %>
     	<%@include file="css/reset.css" %>
-    	<%@include file="font-awesome.min.css" %> 
+    	<%@include file="font-awesome.min.css" %>
         <script src="assets/js/jquery-1.11.1.min.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/js/jquery.backstretch.min.js"></script>
