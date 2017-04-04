@@ -89,7 +89,7 @@
                 
         }
         out.println("<script type=\"text/javascript\">");
-        out.println("location='chats.html';");
+        out.println("location='chatwithus.jsp';");
         out.println("</script>");
         }
         else {

@@ -36,8 +36,10 @@
         <%
             String name=(String)session.getAttribute("user_name");
             String text;
-            if(name==null)
+            if(name==null) {
+                name="anonymous";
                 text="Login";
+            }
             else
                 text="Logout";
         %>
@@ -46,16 +48,16 @@
                 text-align:center;
             }
         </style>
+        <script language="javascript" type="text/javascript">
+
+var timeout = setInterval(reloadChat, 1000);    
+function reloadChat () {
+
+     $('#chatbox').load('chat.jsp');
+}
+</script>
+      
     </head>
-<!--<frameset rows="88%,12%">
-   <frame name="top" src="chat.jsp" frameborder="0"/>
-   <frame name="main" src="newmessage.html" frameborder="0"/>
-   <noframes>
-   <body>
-      Your browser does not support frames.
-   </body>
-   </noframes>
-</frameset>-->
 <body>
 <div class="my-topnav my-card my-top my-light-grey" id="head">
             <a href="index.jsp" >DiFo</a>
@@ -78,35 +80,11 @@
                 
             </div>
                 <div id="chatbox">
-                    <%
-                        try {
-                            DBEngine dbengine = new DBEngine();
-                            dbengine.establishConnection();
-                            try {
-                                Connection con = dbengine.getConnection();
-                                String query="SELECT * from "+Constants.DB_TABLE_CHAT;
-                                PreparedStatement s = con.prepareStatement(query);
-                                ResultSet rs = s.executeQuery();
-                                if (rs.next()) {
-                                    while(rs.next()) {
-                                    %>
-                                    <<%= rs.getTime("timestamp") %>>
-                                    <strong><%= rs.getString("username") %></strong>
-                                    <%= rs.getString("chat") %>
-                                    <br>
-                                    <%
-                                    }
-                                }
-                            }
-                            catch(Exception ex) {
-                                ex.printStackTrace();
-                            }
-                        }
-                        catch(Exception e) {
-                            e.printStackTrace();
-                        }
-                    %>
+                    
                 </div>
+                <script>
+$( "#chatbox" ).load( "chat.jsp" );
+</script>
                 
         <div id="id01" class="modal"> <!-- log in form -->
             <div class="cd-user-modal-container">
