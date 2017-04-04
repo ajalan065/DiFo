@@ -5,6 +5,12 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.lang.*"%>
+<%@page import="java.sql.*"%>
+<%@page import="javax.servlet.http.HttpSession"%>
+<%@page import="constants.DatabaseLogin" %>
+<%@page import="constants.Constants" %>
+<%@page import="DBControl.DBEngine" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -17,87 +23,15 @@
     	<%@include file="my.css" %>
     	<%@include file="style.css" %>
     	<%@include file="css/style.css" %>
+        <%@include file="css/chat_style.css" %>
     	<%@include file="css/reset.css" %>
     	<%@include file="font-awesome.min.css" %>
+        </style>
         <script src="assets/js/jquery-1.11.1.min.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/js/jquery.backstretch.min.js"></script>
 	<script src="assets/js/scripts.js"></script>
 	<script src="js/modernizr.js"></script>
-        body {
-            font:12px arial;
-            color: #222;
-            text-align:center;
-            padding:35px; }
-
-        form, p, span {
-            margin:0;
-            padding-left:10px; }
-
-        input { font:12px arial; }
-
-        a {
-            color:#0000FF;
-            text-decoration:none; }
-
-            a:hover { text-decoration:underline; }
-
-        #wrapper, #loginform {
-            margin:0 auto;
-            background:#EBF4FB;
-            width:100%;
-            height: 89.8%;
-            position: absolute;
-            overflow: hidden;
-            border:1px solid #ACD8F0; }
-
-        #loginform { padding-top:18px; }
-
-            #loginform p { margin: 5px; }
-
-        #chatbox {
-            text-align:left;
-            margin:0 auto;
-            margin-bottom:25px;
-            /*padding:10px;*/
-            background:#fff;
-            height:80%;
-            width:98%;
-            border:1px solid #ACD8F0;
-            overflow:auto; }
-
-        #usermsg {
-            margin:auto;
-            padding-left:50px;
-            width:95%;
-            border:1px solid #ACD8F0; }
-
-        #submit { width: 50px; }
-
-        .error { color: #ff0000; }
-
-        #menu { padding:12.5px 25px 12.5px 25px; }
-
-        .welcome { float:left; }
-
-        .logout { float:right; }
-
-        .msgln { margin:0 0 2px 0; }
-        
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-            padding-top: 60px;
-        }
-        </style>
         
         <%
             String name=(String)session.getAttribute("user_name");
@@ -133,16 +67,38 @@
                 <p class="welcome">Welcome, <% out.println(name);%> <b></b></p>
                 <!--<p class="logout"><a id="exit" href="logout.jsp">Exit Chat</a></p>-->
                 <div style="clear:both"></div>
+                
             </div>
-
-            <div id="chatbox"></div>
-
-            <form name="message" action="SaveMessage.java" method="post">
-                <input name="usermsg" type="text" id="usermsg" size="100" />
-                <input name="submitmsg" type="submit"  id="submitmsg" value="Send" />
-            </form>
-        
-        
+                <div id="chatbox">
+                    <%
+                        try {
+                            DBEngine dbengine = new DBEngine();
+                            dbengine.establishConnection();
+                            try {
+                                Connection con = dbengine.getConnection();
+                                String query="SELECT * from "+Constants.DB_TABLE_CHAT;
+                                PreparedStatement s = con.prepareStatement(query);
+                                ResultSet rs = s.executeQuery();
+                                if (rs.next()) {
+                                    while(rs.next()) {
+                                    %>
+                                    <<%= rs.getTime("timestamp") %>>
+                                    <strong><%= rs.getString("username") %></strong>
+                                    <%= rs.getString("chat") %>
+                                    <br>
+                                    <%
+                                    }
+                                }
+                            }
+                            catch(Exception ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+                        catch(Exception e) {
+                            e.printStackTrace();
+                        }
+                    %>
+                </div>
   	
         <div id="id01" class="modal"> <!-- log in form -->
             <div class="cd-user-modal-container">

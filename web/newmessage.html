@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <link rel="stylesheet" href ="assets/bootstrap/css/bootstrap.min.css">
+    	<link rel="stylesheet" href ="assets/css/form-elements.css">
+    	<link rel="stylesheet" href ="my.css" >
+    	<link rel="stylesheet" href ="style.css" >
+    	<link rel="stylesheet" href ="css/style.css" >
+    	<link rel="stylesheet" href ="css/reset.css">
+        <link rel="stylesheet" href ="css/chat_style.css">
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form name="message" action="inputmessage.jsp" method="post">
+                <input name="usermsg" type="text" id="usermsg" size="100" />
+                <input name="submitmsg" type="submit"  id="submitmsg" value="Send" onclick="parent.top.location.reload()"/>
+            </form>
+        
+    </body>
+</html>
