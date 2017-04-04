@@ -15,6 +15,9 @@
 	<script src="assets/js/jquery.backstretch.min.js"></script>
 	<script src="assets/js/scripts.js"></script>
 	<script src="js/modernizr.js"></script>
+        
+
+
 	<title>
 		Discussion Forum
 	</title>
@@ -28,7 +31,7 @@
     	<ul class="nav nav-tabs" role="tablist" style="float: right;">
       		<li role="presentation"><a href="#" aria-controls="home" role="tab" >Home</a></li>
       		<li role="presentation"><a href="questions.jsp" aria-controls="messages" role="tab" >Questions</a></li>
-      		<li role="presentation"><a href="chat.jsp" aria-controls="settings" role="tab" >Chat</a></li>
+      		<li role="presentation"><a href="chatwithus.jsp" aria-controls="settings" role="tab" >Chat</a></li>
                 <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" >Users</a></li>
                 <li role="presentation"><a href="showprofile.jsp" aria-controls="profile" role="tab" >Profile</a></li>
                 <li role="presentation"><a href="aboutus.jsp" aria-controls="profile" role="tab" >About Us</a></li>
@@ -175,6 +178,8 @@
                     document.getElementById('check').innerHTML = '</b><b><span style="color:red">Weak!</span>';
                 }
             }
+            
+    
         </script>
 </body>
 </html>

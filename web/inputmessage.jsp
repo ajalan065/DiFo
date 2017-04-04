@@ -27,7 +27,7 @@
             int res = chatMessage.insertChatMessage(name, msg); // keep dummy username for now
             
             if (res > 0) {
-                response.sendRedirect("newmessage.html");
+                response.sendRedirect("chatwithus.jsp");
             } else  {
                 out.println("Could not send message.. Try again!!");
             }
