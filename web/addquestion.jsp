@@ -18,6 +18,7 @@
     String head = request.getParameter("qhead");
     String body = request.getParameter("qbody");
     String tags = request.getParameter("qtags");
+    String username = (String)session.getAttribute("user_name");
     
     try {
         DBEngine dbengine = new DBEngine();
@@ -27,7 +28,7 @@
             QuestionDAO questionDAO = new QuestionDAO(con);
             TagDAO tagDAO = new TagDAO(con);
             
-            int res = questionDAO.insertQuestion(head, body, "yolo"); // keep dummy username for now
+            int res = questionDAO.insertQuestion(head, body, username); // keep dummy username for now
             tagDAO.insertTag(tags);
             if (res > 0) {
                 response.sendRedirect("questions.jsp");

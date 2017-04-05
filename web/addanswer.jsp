@@ -16,6 +16,7 @@
 <%
     String body = request.getParameter("answer-body");
     int id = (Integer)session.getAttribute("current_question");
+    String username = (String)session.getAttribute("user_name");
     
     try {
         DBEngine dbengine = new DBEngine();
@@ -24,7 +25,7 @@
             Connection con = dbengine.getConnection();
             AnswerDAO answerDAO = new AnswerDAO(con);
             
-            int res = answerDAO.insertAnswer(body, "yolo", id); // keep dummy username for now
+            int res = answerDAO.insertAnswer(body, username, id); // keep dummy username for now
             if (res > 0) {
                 response.sendRedirect("qa.jsp?param=" + id);
             } else  {
