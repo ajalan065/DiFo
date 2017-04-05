@@ -67,7 +67,7 @@
                     <li role="presentation"><a href="index.jsp" aria-controls="home" role="tab" >Home</a></li>
                     <li role="presentation"><a href="questions.jsp" aria-controls="messages" role="tab" >Questions</a></li>
                     <li role="presentation"><a href="chat.jsp" aria-controls="settings" role="tab" >Chat</a></li>
-                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" >Users</a></li>
+                    <li role="presentation"><a href="users.jsp" aria-controls="profile" role="tab" >Users</a></li>
                     <li role="presentation"><a href="showprofile.jsp" aria-controls="profile" role="tab" >Profile</a></li>
                     <li role="presentation"><a href="aboutus.jsp" aria-controls="profile" role="tab" >About Us</a></li>
                     <li><button onclick="logout();">Logout</button></li>
