@@ -57,6 +57,26 @@
                 text-shadow: 0px 1px 0px #f2f2f2;
             }
         </style>
+        
+        <%
+            String name=(String)session.getAttribute("user_name");
+            String text;
+            if(name==null)
+                text="Login";
+            else
+                text="Logout";
+        %>
+        
+        <script type="text/javascript" >
+            function add_answer(text) {
+                if(text==="Logout") {
+                    return true;
+                } else if(text==="Login") {
+                    alert('You must Login/Signup to answer question');
+                    return false;
+                }
+            }
+        </script>
     </head>
     <body>
         
@@ -137,7 +157,7 @@
         </div>   
         
         <div id="write-answer">
-            <form name="answer-form" action="addanswer.jsp" method="post">
+            <form name="answer-form" action="addanswer.jsp" onsubmit="return add_answer('<%= text%>')" method="post">
                 <input name="answer-body" type="text" id="answer-body" size="100" />
                 <input name="submit_answer" type="submit"  id="submit-answer" value="Answer" />
             </form>

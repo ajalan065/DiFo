@@ -69,6 +69,13 @@
             function open_thread(id) {
                 window.location = "qa.jsp?param=" + id;
             }
+            function ask_question(text) {
+                if(text==="Logout") {
+                    window.location="askquestion.html";
+                } else if(text==="Login") {
+                    alert('You must Login/Signup to ask question');
+                }
+            }
         </script>
     </head>
     <body>
@@ -155,7 +162,7 @@
         %>
         <div id="all-questions">
             <div id="ask-question">
-                <a href="askquestion.html" >Add Question</a>
+                <button onclick="ask_question('<%=text %>')" >Add Question</button> 
             </div>
             
             <table id="question-table">
@@ -193,4 +200,3 @@
         
     </script>
 </html>
-
