@@ -4,6 +4,10 @@
     Author     : srijit
 --%>
 
+<%@page import="model.User"%>
+<%@page import="DBControl.UserDAO"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="DBControl.DBEngine"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -44,17 +48,51 @@
             }
         </style>
         <%
-            String name=(String)session.getAttribute("user_name");
-            String email=(String)session.getAttribute("user_email");
-            String fname=(String)session.getAttribute("f_name");
-            String mname=(String)session.getAttribute("m_name");
-            String lname=(String)session.getAttribute("l_name");
-            String status=(String)session.getAttribute("user_status");
-            String text;
-            if(name==null)
-                text="Login";
-            else
-                text="Logout";
+            String param = request.getParameter("param");
+            String name = null;
+            String email = null;
+            String fname = null, mname = null, lname = null;
+            String status = null;
+            String bio = null;
+            String text = "Logout";
+            User user = null;
+            
+            if (param.equals("me")) {
+                name=(String)session.getAttribute("user_name");
+                email=(String)session.getAttribute("user_email");
+                fname=(String)session.getAttribute("f_name");
+                mname=(String)session.getAttribute("m_name");
+                lname=(String)session.getAttribute("l_name");
+                status=(String)session.getAttribute("user_status");
+                if(name==null)
+                    text="Login";
+                else
+                    text="Logout";
+            } else if(!param.equalsIgnoreCase("me")){
+                name = (String)request.getParameter("param");
+                try {
+                    DBEngine dbengine = new DBEngine();
+                    dbengine.establishConnection();
+                    try {
+                        Connection con = dbengine.getConnection();
+                        UserDAO userDAO = new UserDAO(con);
+                        user = userDAO.getUserProfileByUsername(name);
+                    } catch(Exception ex) {
+                        ex.printStackTrace();
+                    }
+                    dbengine.closeConnection();
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+                
+                if(user != null) {
+                    fname = user.getFName();
+                    mname = user.getMName();
+                    lname = user.getLName();
+                    status = user.getStatus();
+                    bio = user.getBio();
+                }
+            }
         %>
     </head>
     <body>
@@ -138,7 +176,7 @@
             if (event.target === modal) {
                 modal.style.display = "none";
             }
-        }
+        };
         
     </script>
    

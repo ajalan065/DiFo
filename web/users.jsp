@@ -58,6 +58,12 @@
 	<script src="assets/js/jquery.backstretch.min.js"></script>
 	<script src="assets/js/scripts.js"></script>
 	<script src="js/modernizr.js"></script>
+        
+        <script type="text/javascript" >
+            function show_profile(username) {
+                window.location = "showprofile.jsp?param=" + username;
+            }
+        </script>
     </head>
         
     <body>
@@ -69,7 +75,7 @@
                     <li role="presentation"><a href="questions.jsp" aria-controls="messages" role="tab" >Questions</a></li>
                     <li role="presentation"><a href="chatwithus.jsp" aria-controls="settings" role="tab" >Chat</a></li>
                     <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" >Users</a></li>
-                    <li role="presentation"><a href="showprofile.jsp" aria-controls="profile" role="tab" >Profile</a></li>
+                    <li role="presentation"><a href="showprofile.jsp?param=me" aria-controls="profile" role="tab" >Profile</a></li>
                     <li role="presentation"><a href="aboutus.jsp" aria-controls="profile" role="tab" >About Us</a></li>
                     <li><button onclick="func('<%=text %>');" class="btn btn-block btn-info"><%out.println(text);%></button></li>
             </ul>
@@ -139,21 +145,25 @@
             } catch(Exception e) {
                 e.printStackTrace();
             }
+        %>
+        <table id="user-table" >
+        <%
             
             if (userProfiles != null) {
                 for (User user : userProfiles) {
         %>
-        <div id="user">
-            <div><%= user.getUsername()%></div>
-            <div><%= user.getFName()%></div>
-            <div><%= user.getMName()%></div>
-            <div><%= user.getLName()%></div>
-            <div><%= user.getStatus()%></div>
-            <div><%= user.getBio()%></div>
-        </div>
+        <tr id="user-tr">
+            <td onclick="show_profile('<%= user.getUsername()%>')"><%= user.getUsername()%></td>
+            <td><%= user.getFName()%></td>
+            <td><%= user.getMName()%></td>
+            <td><%= user.getLName()%></td>
+            <td><%= user.getStatus()%></td>
+            <td><%= user.getBio()%></td>
+        </tr>
         <%
                 }
             }
         %>
+        </table>
     </body>
 </html>

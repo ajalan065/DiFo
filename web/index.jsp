@@ -33,7 +33,7 @@
       		<li role="presentation"><a href="questions.jsp" aria-controls="messages" role="tab" >Questions</a></li>
       		<li role="presentation"><a href="chatwithus.jsp" aria-controls="settings" role="tab" >Chat</a></li>
                 <li role="presentation"><a href="users.jsp" aria-controls="profile" role="tab" >Users</a></li>
-                <li role="presentation"><a href="showprofile.jsp" aria-controls="profile" role="tab" >Profile</a></li>
+                <li role="presentation"><a href="showprofile.jsp?param=me" aria-controls="profile" role="tab" >Profile</a></li>
                 <li role="presentation"><a href="aboutus.jsp" aria-controls="profile" role="tab" >About Us</a></li>
                 <li><div class="main-nav"><a class="cd-signup" href="#0" data-modal-id="modal-register">Register</a></div></li>
     	</ul>
