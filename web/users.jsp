@@ -14,6 +14,7 @@
 <%@page import="javax.servlet.http.Part" %>
 <%@page import="java.io.*" %>
 <%@page import="DBControl.DBEngine" %>
+<%@page import="constants.Constants" %>
 
 <!DOCTYPE html>
 <html>
@@ -141,9 +142,11 @@
                     userProfiles = userDAO.getUsersProfile();
                 } catch (Exception ex) {
                     ex.printStackTrace();
+                    out.println(Constants.DATABASE_CONN_ERR);
                 }
             } catch(Exception e) {
                 e.printStackTrace();
+                out.println(Constants.DATABASE_CONN_ERR);
             }
         %>
         <table id="user-table" >

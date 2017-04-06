@@ -14,29 +14,35 @@
 <%@page import="DBControl.AnswerDAO" %>
 
 <%
-    String body = request.getParameter("answer-body");
-    int id = (Integer)session.getAttribute("current_question");
-    String username = (String)session.getAttribute("user_name");
-    
     try {
-        DBEngine dbengine = new DBEngine();
-        dbengine.establishConnection();
+        String body = request.getParameter("answer-body");
+        int id = (Integer)session.getAttribute("current_question");
+        String username = (String)session.getAttribute("user_name");
+
         try {
-            Connection con = dbengine.getConnection();
-            AnswerDAO answerDAO = new AnswerDAO(con);
-            
-            int res = answerDAO.insertAnswer(body, username, id); // keep dummy username for now
-            if (res > 0) {
-                response.sendRedirect("qa.jsp?param=" + id);
-            } else  {
-                out.println("Your question was not posted. Please try again!!");
+            DBEngine dbengine = new DBEngine();
+            dbengine.establishConnection();
+            try {
+                Connection con = dbengine.getConnection();
+                AnswerDAO answerDAO = new AnswerDAO(con);
+
+                int res = answerDAO.insertAnswer(body, username, id);
+                if (res > 0) {
+                    response.sendRedirect("qa.jsp?param=" + id);
+                } else  {
+                    out.println(Constants.QUES_NOT_POSTED_ERR);
+                }
+            } catch(Exception ex) {
+                ex.printStackTrace();
+                out.println(Constants.DATABASE_CONN_ERR);
             }
-        } catch(Exception ex) {
-            ex.printStackTrace();
+            dbengine.closeConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+            out.println(Constants.DATABASE_CONN_ERR);
         }
-        dbengine.closeConnection();
-    } catch (Exception e) {
+    } catch(Exception e) {
         e.printStackTrace();
-        out.println("Could not connect");
+        out.println(Constants.NOT_FOUND_ERR);
     }
 %>

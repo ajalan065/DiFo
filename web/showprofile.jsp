@@ -8,6 +8,7 @@
 <%@page import="DBControl.UserDAO"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="DBControl.DBEngine"%>
+<%@page import="constants.Constants" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -56,42 +57,48 @@
             String bio = null;
             String text = "Logout";
             User user = null;
-            
-            if (param.equals("me")) {
-                name=(String)session.getAttribute("user_name");
-                email=(String)session.getAttribute("user_email");
-                fname=(String)session.getAttribute("f_name");
-                mname=(String)session.getAttribute("m_name");
-                lname=(String)session.getAttribute("l_name");
-                status=(String)session.getAttribute("user_status");
-                if(name==null)
-                    text="Login";
-                else
-                    text="Logout";
-            } else if(!param.equalsIgnoreCase("me")){
-                name = (String)request.getParameter("param");
-                try {
-                    DBEngine dbengine = new DBEngine();
-                    dbengine.establishConnection();
+            try {            
+                if (param.equals("me")) {
+                    name=(String)session.getAttribute("user_name");
+                    email=(String)session.getAttribute("user_email");
+                    fname=(String)session.getAttribute("f_name");
+                    mname=(String)session.getAttribute("m_name");
+                    lname=(String)session.getAttribute("l_name");
+                    status=(String)session.getAttribute("user_status");
+                    if(name==null)
+                        text="Login";
+                    else
+                        text="Logout";
+                } else if(!param.equalsIgnoreCase("me")){
+                    name = (String)request.getParameter("param");
                     try {
-                        Connection con = dbengine.getConnection();
-                        UserDAO userDAO = new UserDAO(con);
-                        user = userDAO.getUserProfileByUsername(name);
-                    } catch(Exception ex) {
-                        ex.printStackTrace();
+                        DBEngine dbengine = new DBEngine();
+                        dbengine.establishConnection();
+                        try {
+                            Connection con = dbengine.getConnection();
+                            UserDAO userDAO = new UserDAO(con);
+                            user = userDAO.getUserProfileByUsername(name);
+                        } catch(Exception ex) {
+                            ex.printStackTrace();
+                            out.println(Constants.DATABASE_CONN_ERR);
+                        }
+                        dbengine.closeConnection();
+                    } catch(Exception e) {
+                        e.printStackTrace();
+                        out.println(Constants.DATABASE_CONN_ERR);
                     }
-                    dbengine.closeConnection();
-                } catch(Exception e) {
-                    e.printStackTrace();
+
+                    if(user != null) {
+                        fname = user.getFName();
+                        mname = user.getMName();
+                        lname = user.getLName();
+                        status = user.getStatus();
+                        bio = user.getBio();
+                    }
                 }
-                
-                if(user != null) {
-                    fname = user.getFName();
-                    mname = user.getMName();
-                    lname = user.getLName();
-                    status = user.getStatus();
-                    bio = user.getBio();
-                }
+            } catch(Exception e) {
+                e.printStackTrace();
+                out.println(Constants.NOT_FOUND_ERR);
             }
         %>
     </head>

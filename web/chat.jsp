@@ -58,10 +58,12 @@
                             }
                             catch(Exception ex) {
                                 ex.printStackTrace();
+                                out.println(Constants.DATABASE_CONN_ERR);
                             }
                         }
                         catch(Exception e) {
                             e.printStackTrace();
+                            out.println(Constants.DATABASE_CONN_ERR);
                         }
                     %>
     </body>
