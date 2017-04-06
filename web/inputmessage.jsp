@@ -14,29 +14,35 @@
 <%@page import="DBControl.DBEngine" %>
 
 <%
-    String msg = request.getParameter("usermsg");
-    String name=(String)session.getAttribute("user_name");
-    
     try {
-        DBEngine dbengine = new DBEngine();
-        dbengine.establishConnection();
+        String msg = request.getParameter("usermsg");
+        String name=(String)session.getAttribute("user_name");
+
         try {
-            Connection con = dbengine.getConnection();
-            ChatMessage chatMessage = new ChatMessage(con);
-            
-            int res = chatMessage.insertChatMessage(name, msg); // keep dummy username for now
-            
-            if (res > 0) {
-                response.sendRedirect("chatwithus.jsp");
-            } else  {
-                out.println("Could not send message.. Try again!!");
+            DBEngine dbengine = new DBEngine();
+            dbengine.establishConnection();
+            try {
+                Connection con = dbengine.getConnection();
+                ChatMessage chatMessage = new ChatMessage(con);
+
+                int res = chatMessage.insertChatMessage(name, msg); // keep dummy username for now
+
+                if (res > 0) {
+                    response.sendRedirect("chatwithus.jsp");
+                } else  {
+                    out.println("Could not send message.. Try again!!");
+                }
+            } catch(Exception ex) {
+                ex.printStackTrace();
+                out.println("Error establishing Database Connection");
             }
-        } catch(Exception ex) {
-            ex.printStackTrace();
+            dbengine.closeConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+            out.println("Error establishing Database Connection");
         }
-        dbengine.closeConnection();
     } catch (Exception e) {
         e.printStackTrace();
-        out.println("Could not connect");
+        out.println("404 Not Found error!");
     }
 %>

@@ -16,6 +16,7 @@
 <%@page import="DBControl.QuestionDAO" %>
 <%@page import="model.Question" %>
 <%@page import="model.Answer" %>
+<%@page import="constants.Constants" %>
 
 <!DOCTYPE html>
 <html>
@@ -112,10 +113,12 @@
                     answers = answerDAO.getAnswersByQid(id);
                 } catch(Exception ex) {
                     ex.printStackTrace();
+                    out.println(Constants.DATABASE_CONN_ERR);
                 }
                 dbengine.closeConnection();
             } catch(Exception e) {
                 e.printStackTrace();
+                out.println(Constants.DATABASE_CONN_ERR);
             }
         %>
         

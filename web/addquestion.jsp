@@ -33,14 +33,15 @@
             if (res > 0) {
                 response.sendRedirect("questions.jsp");
             } else  {
-                out.println("Your question was not posted. Please try again!!");
+                out.println(Constants.QUES_NOT_POSTED_ERR);
             }
         } catch(Exception ex) {
             ex.printStackTrace();
+            out.println(Constants.DATABASE_CONN_ERR);
         }
         dbengine.closeConnection();
     } catch (Exception e) {
         e.printStackTrace();
-        out.println("Could not connect");
+        out.println(Constants.DATABASE_CONN_ERR);
     }
 %>

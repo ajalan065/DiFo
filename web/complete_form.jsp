@@ -55,17 +55,18 @@
         		//Use JOptions instead to display the above message.
         }
         else {
-            out.println("Could not save data.. Try again!!");
+            out.println(Constants.DATA_NOT_SAVED_ERR);
         }
             
     }
     catch(Exception ex) {
-        ex.printStackTrace();    
+        ex.printStackTrace();
+        out.println(Constants.DATABASE_CONN_ERR);
     }
 
     }
     catch(Exception e) {
         e.printStackTrace();
-        out.println("Could not connect");
+        out.println(Constants.DATABASE_CONN_ERR);
     }
 %>
