@@ -142,7 +142,8 @@
                     userProfiles = userDAO.getUsersProfile();
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    out.println(Constants.DATABASE_CONN_ERR);
+                    out.println(Constants.DATABASE_CONN_ERR+"\n");
+                    out.println(ex.getMessage());
                 }
             } catch(Exception e) {
                 e.printStackTrace();
@@ -156,12 +157,13 @@
                 for (User user : userProfiles) {
         %>
         <tr id="user-tr">
-            <td onclick="show_profile('<%= user.getUsername()%>')"><%= user.getUsername()%></td>
+            <td onclick="show_profile('<%= user.getUsername()%>')" style="cursor: pointer;"><%= user.getUsername()%></td>
             <td><%= user.getFName()%></td>
             <td><%= user.getMName()%></td>
             <td><%= user.getLName()%></td>
             <td><%= user.getStatus()%></td>
-            <td><%= user.getBio()%></td>
+            <td><%= user.getPicture()%></td>
+            <td><%= user.getGender()%></td>
         </tr>
         <%
                 }

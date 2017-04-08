@@ -4,6 +4,7 @@
     Author     : srijit
 --%>
 
+<%@page import="java.lang.String"%>
 <%@page import="model.User"%>
 <%@page import="DBControl.UserDAO"%>
 <%@page import="java.sql.Connection"%>
@@ -54,8 +55,11 @@
             String email = null;
             String fname = null, mname = null, lname = null;
             String status = null;
-            String bio = null;
+            //String bio = null;
             String text = "Logout";
+            String picture=null;
+            String gender=null;
+            String filepath=(String)session.getAttribute("file_path");
             User user = null;
             try {            
                 if (param.equals("me")) {
@@ -65,6 +69,9 @@
                     mname=(String)session.getAttribute("m_name");
                     lname=(String)session.getAttribute("l_name");
                     status=(String)session.getAttribute("user_status");
+                    picture=(String)session.getAttribute("user_picture");
+                    gender=(String)session.getAttribute("user_gender");
+                    
                     if(name==null)
                         text="Login";
                     else
@@ -80,12 +87,13 @@
                             user = userDAO.getUserProfileByUsername(name);
                         } catch(Exception ex) {
                             ex.printStackTrace();
-                            out.println(Constants.DATABASE_CONN_ERR);
+                           out.println(Constants.DATABASE_CONN_ERR);
                         }
                         dbengine.closeConnection();
                     } catch(Exception e) {
                         e.printStackTrace();
                         out.println(Constants.DATABASE_CONN_ERR);
+                        
                     }
 
                     if(user != null) {
@@ -93,7 +101,9 @@
                         mname = user.getMName();
                         lname = user.getLName();
                         status = user.getStatus();
-                        bio = user.getBio();
+                        //email = user.getEmail();
+                        picture = user.getPicture();
+                        gender = user.getGender();
                     }
                 }
             } catch(Exception e) {
@@ -163,12 +173,55 @@
             </div>            
 	</div>
         
-            <p><span style="color:black;font-weight: bold">Username:</span><%out.println(name);%></p><br/>
-            <p><span style="color:black;font-weight: bold">First Name:</span><%out.println(fname);%></p><br/>
-            <p><span style="color:black;font-weight: bold">Middle Name:</span><%out.println(mname);%></p><br/>
-            <p><span style="color:black;font-weight: bold">Last Name:</span><%out.println(lname);%></p><br/>
-            <p><span style="color:black;font-weight: bold">Email Address:</span><%out.println(email);%></p><br/>
-            <p><span style="color:black;font-weight: bold">Status:</span><%out.println(status);%></p><br/>
+            <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+   
+   
+          <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title"><%out.println(name);%></h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                  <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="<%out.println(filepath+picture);%>" class="img-circle img-responsive" style="width: 7em; height: 7em;"> </div>
+                
+                <div class=" col-md-9 col-lg-9 "> 
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td>First Name:</td>
+                        <td><%out.println(fname);%></td>
+                      </tr>
+                      <tr>
+                        <td>Middle Name:</td>
+                        <td><%out.println(mname);%></td>
+                      </tr>
+                      <tr>
+                        <td>Last Name:</td>
+                        <td><%out.println(lname);%></td>
+                      </tr>
+                      
+                      <tr>
+                        <td>Status</td>
+                        <td><%out.println(status);%></td>
+                      </tr>
+                   
+                         <tr>
+                             <tr>
+                        <td>Gender</td>
+                        <td><%out.println(gender);%></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
         
     </body>
      <script type="text/javascript">

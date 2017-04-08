@@ -61,6 +61,7 @@
             String status=(String)session.getAttribute("user_status");
             String picture=(String)session.getAttribute("user_picture");
             String filepath=(String)session.getAttribute("file_path");
+            String gender=(String)session.getAttribute("user_gender");
             
         %>
         <div class="my-topnav my-card my-top my-light-grey" id="head">
@@ -109,6 +110,13 @@
 	    <p class="fieldset">
 		<label for="signup-email" id="lab">E-mail</label>
                 <input  type="email" placeholder="<%out.println(email);%>" name="email" required style="width: 70%;" disabled>
+		
+            </p>
+            
+            <br>
+            <p class="fieldset">
+		<label for="signup-email" id="lab">Gender</label>
+                <input  type="text" placeholder="<%out.println(gender);%>" name="gender" required style="width: 70%;">
 		
             </p>
             <br>

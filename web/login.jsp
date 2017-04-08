@@ -93,9 +93,6 @@
                     session.setAttribute("user_status", status);
 
             }
-            out.println("<script type=\"text/javascript\">");
-            out.println("location='chatwithus.jsp';");
-            out.println("</script>");
             
             // for profile picture
             String q6="SELECT picture from " + Constants.DB_TABLE_USER + " WHERE email='"+email+"'";
@@ -112,6 +109,22 @@
                 String picture = "../web/assets/img/profile.png";
                 session.setAttribute("user_picture", picture);
             }
+            
+            // for gender
+            String q7="SELECT gender from " + Constants.DB_TABLE_USER + " WHERE email='"+email+"'";
+            PreparedStatement ps7=con.prepareStatement(q7);
+
+            ResultSet res7 = ps7.executeQuery();
+
+            if (res7.next()) {
+                String gender=res7.getString("gender");
+                    session.setAttribute("user_gender", gender);
+
+            }
+            out.println("<script type=\"text/javascript\">");
+                out.println("alert('Successfully Logged In!!');");
+                out.println("location='chatwithus.jsp';");
+                out.println("</script>");
             }
             else {
                 out.println("<script type=\"text/javascript\">");

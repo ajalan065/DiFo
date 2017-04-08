@@ -15,10 +15,11 @@ public class User {
     private final String password;
     private final String fName, mName, lName;
     private final String status;
-    private final String bio;
+    private final String picture;
+    private final String gender;
     
     public User(String username, String email, String password, String fName,
-            String mName, String lName, String status, String bio) {
+            String mName, String lName, String status, String picture, String gender) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -26,7 +27,8 @@ public class User {
         this.mName = mName;
         this.lName = lName;
         this.status = status;
-        this.bio = bio;
+        this.picture=picture;
+        this.gender=gender;
     }
     
     public String getUsername() {
@@ -57,7 +59,11 @@ public class User {
         return this.status;
     }
     
-    public String getBio() {
-        return this.bio;
+    public String getPicture() {
+        return this.picture;
+    }
+    
+    public String getGender() {
+        return this.gender;
     }
 }

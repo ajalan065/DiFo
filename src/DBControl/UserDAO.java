@@ -55,7 +55,7 @@ public class UserDAO {
      */
     public List<User> getUsersProfile()throws SQLException {
         List<User> userProfiles = new ArrayList<>();
-        String query = "SELECT username, FName, MName, LName, Status, Bio FROM " 
+        String query = "SELECT username, FName, MName, LName, Status, picture, gender FROM " 
                 + TABLE;
         PreparedStatement ps = connection.prepareStatement(query);
         ResultSet rst = ps.executeQuery();
@@ -63,7 +63,7 @@ public class UserDAO {
         while(rst.next()) {
             User user = new User(rst.getString("username"), "", "", 
             rst.getString("FName"), rst.getString("MName"), rst.getString("LName"), 
-            rst.getString("Status"), rst.getString("Bio"));
+            rst.getString("Status"), rst.getString("picture"), rst.getString("gender"));
             userProfiles.add(user);
         }
         
@@ -77,7 +77,7 @@ public class UserDAO {
      * @throws SQLException 
      */
     public User getUserProfileByUsername(String username) throws SQLException {
-        String query = "SELECT username, FName, MName, LName, Status, Bio FROM " 
+        String query = "SELECT username, FName, MName, LName, Status, picture, gender FROM " 
                 + TABLE + " WHERE username=?";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setString(1, username);
@@ -86,7 +86,7 @@ public class UserDAO {
         if(rst.next()) {
             user = new User(rst.getString("username"), "", "", 
             rst.getString("FName"), rst.getString("MName"), rst.getString("LName"), 
-            rst.getString("Status"), rst.getString("Bio"));
+            rst.getString("Status"), rst.getString("picture"), rst.getString("gender"));
             return user;
         }
         return user;
