@@ -1,3 +1,5 @@
+<%@page import="java.io.File"%>
+<%@page import="java.nio.file.Paths"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page language="java"%>
 <%@page import="java.lang.*"%>
@@ -13,7 +15,8 @@
     dbengine.establishConnection();
     try {
         Connection con = dbengine.getConnection();
-        
+        String session_filePath= Paths.get("assets/img")+File.separator;
+        session.setAttribute("file_path", session_filePath);
         String name=request.getParameter("username");
         String email=request.getParameter("email");
         String password = request.getParameter("password");
