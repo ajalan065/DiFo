@@ -48,8 +48,10 @@
             }
         </style>
         
+        
+        
     </head>
-    <body>
+    <body style="overflow-x: hidden;">
         <%
             String name=(String)session.getAttribute("user_name");
             String email=(String)session.getAttribute("user_email");
@@ -57,6 +59,8 @@
             String mname=(String)session.getAttribute("m_name");
             String lname=(String)session.getAttribute("l_name");
             String status=(String)session.getAttribute("user_status");
+            String picture=(String)session.getAttribute("user_picture");
+            String filepath=(String)session.getAttribute("file_path");
             
         %>
         <div class="my-topnav my-card my-top my-light-grey" id="head">
@@ -72,8 +76,23 @@
                 <li><button onclick="logout();">Logout</button></li>
     	</ul>
   	</div>
-        <h1 style="font-size: 1.5em; font-weight: bold;"><em>Welcome <%out.println(name);%></em>. Edit your profile...</h1>
+        <h1 style="font-size: 1.5em; font-weight: bold; padding-left: 1.5em;"><em>Welcome <%out.println(name);%></em>. Edit your profile...</h1>
+        <form method="post" action="upload_picture.jsp" enctype="multipart/form-data" id="prof_form" class="cd-form">
+            
+                <img src="<%out.println(filepath+picture);%>" id="profile_pic"/>
+                <br>
+                
+                <span  style="float:right; width: 15%; right: 3em; top: 23.5em; position: absolute;">
+                    <!--<label for="prof_pic">Upload Picture </label>-->
+                    <input type="file" name="prof_pic" id="prof_pic" style="display:block; cursor: pointer;"/>
+                </span>
+                   <!-- <button style="border-radius:50%; float:right;  width: 14em; height: 14em;" name="prof_btn"></button>-->
+                <!--<input type="image" src="assets/img/profile.png" name="saveForm" class="" id="profile_pic" />-->
+                <!--<button class="btn btn-success" id="submit_pic" style="width:12%;"><img src="assets/img/profile.png" id="profile_pic"/></button>-->
+            
+        </form>
         <form method="post" action="complete_form.jsp" class="cd-form">
+            
             <p class="fieldset">
 		<label for="signup-username" id="lab">Name</label>
 		<input type="text" placeholder="<%out.println(fname);%>" name="fname" required size="20">
@@ -108,5 +127,12 @@
         function logout() {
             window.location="logout.jsp";
         }
+    </script>
+    
+    <!-- Automatically submit profile picture form on image upload -->
+    <script type="text/javascript">
+            document.getElementById("prof_pic").onchange = function() {
+                document.getElementById("prof_form").submit();
+            };
     </script>
 </html>

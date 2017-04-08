@@ -7,3 +7,12 @@
 .tab-nav > li > a::after { background: #21527d none repeat scroll 0% 0%; color: #fff; }
 .tab-pane { padding: 15px 0; }
 .tab-content{padding:20px}
+
+#profile_pic {
+    display: inline-block;
+    width: 14em;
+    height: 14em;
+    border-radius: 50%;
+    background:url('assets/img/profile.png');
+    float: right;
+}

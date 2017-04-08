@@ -49,7 +49,7 @@
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Changes Saved!!');");
             out.println("</script>");
-            response.sendRedirect("edit_profile.jsp");
+            //response.sendRedirect("edit_profile.jsp");
                         
 
         		//Use JOptions instead to display the above message.

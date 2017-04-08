@@ -4,6 +4,8 @@
     Author     : ajalan
 --%>
 
+<%@page import="java.nio.file.Paths"%>
+<%@page import="java.io.File"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.lang.*"%>
 <%@page import="java.sql.*"%>
@@ -18,6 +20,8 @@
         String email=request.getParameter("email");
         session.setAttribute("user_email", email);
         String password=request.getParameter("password");
+        String session_filePath= Paths.get("assets/img")+File.separator;
+        session.setAttribute("file_path", session_filePath);
         /*session.setAttribute("user_name", name);
 
         session.setAttribute("m_name", mname);
@@ -92,6 +96,22 @@
             out.println("<script type=\"text/javascript\">");
             out.println("location='chatwithus.jsp';");
             out.println("</script>");
+            
+            // for profile picture
+            String q6="SELECT picture from " + Constants.DB_TABLE_USER + " WHERE email='"+email+"'";
+            PreparedStatement ps6=con.prepareStatement(q6);
+
+            ResultSet res6 = ps6.executeQuery();
+
+            if (res6.next()) {
+                String picture=res6.getString("picture");
+                    session.setAttribute("user_picture", picture);
+
+            }
+            else {
+                String picture = "../web/assets/img/profile.png";
+                session.setAttribute("user_picture", picture);
+            }
             }
             else {
                 out.println("<script type=\"text/javascript\">");
@@ -100,6 +120,8 @@
                 out.println("</script>");
 
             }
+            
+            
 
         }
         catch(Exception ex) {
