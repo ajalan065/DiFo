@@ -1,3 +1,8 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.lang.*"%>
+<%@page import="java.sql.*"%>
+<%@page import="javax.servlet.http.HttpSession"%>
+
 <html>
 <head>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
@@ -16,7 +21,22 @@
 	<script src="assets/js/scripts.js"></script>
 	<script src="js/modernizr.js"></script>
         
-
+        <%
+            String isLoggedIn = (String)session.getAttribute("isloggedIn");
+            String icon=null;
+            if(session == null || session.getAttribute("isloggedIn") == null) {
+                icon = "fa fa-user-plus fa-lg";
+            }
+            else {
+                icon= "fa fa-user fa-lg";
+            }
+            String usname=(String)session.getAttribute("user_name");
+            String text;
+            if(usname==null)
+                text="Login";
+            else
+                text="Logout";
+        %>
 
 	<title>
 		Discussion Forum
@@ -31,11 +51,12 @@
     	<ul class="nav nav-tabs" role="tablist" style="float: right;">
       		<li role="presentation"><a href="#" aria-controls="home" role="tab" >Home</a></li>
       		<li role="presentation"><a href="questions.jsp" aria-controls="messages" role="tab" >Questions</a></li>
-      		<li role="presentation"><a href="chatwithus.jsp" aria-controls="settings" role="tab" >Chat</a></li>
+      		<li role="presentation"><a onclick="seeChat('<%=text %>');" aria-controls="settings" role="tab" >Chat</a></li>
                 <li role="presentation"><a href="users.jsp" aria-controls="profile" role="tab" >Users</a></li>
                 <li role="presentation"><a href="showprofile.jsp?param=me" aria-controls="profile" role="tab" >Profile</a></li>
                 <li role="presentation"><a href="aboutus.jsp" aria-controls="profile" role="tab" >About Us</a></li>
-                <li><div class="main-nav"><a class="cd-signup" href="#0" data-modal-id="modal-register">Register</a></div></li>
+                <!--<li><div class="main-nav"><a class="cd-signup" href="#0" data-modal-id="modal-register">Register</a></div></li>-->
+                <li><div class="main-nav"><a id="001" class="cd-signup" href="#0" data-modal-id="modal-register"  style="background: transparent;"><i class="<%out.println(icon);%>" style="color: darkcyan;"></i></a></div></li>
     	</ul>
   	</div>
 
@@ -178,6 +199,15 @@
                     document.getElementById('check').innerHTML = '</b><b><span style="color:red">Weak!</span>';
                 }
             }
+            
+            function seeChat(text) {
+            if(text==="Logout")
+                window.location="chatwithus.jsp";
+           else if(text==="Login") {
+               alert('You must login to continue..');
+                document.getElementById('id001').style.display='block';
+            }
+        }
             
     
         </script>

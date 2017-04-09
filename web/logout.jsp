@@ -17,6 +17,7 @@
         session.removeAttribute("m_name");
         session.removeAttribute("l_name");
         session.removeAttribute("user_status");
+        session.removeAttribute("isloggedIn");
         session.invalidate();
         out.println("<script type=\"text/javascript\">");
         out.println("location='index.jsp';");

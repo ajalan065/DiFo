@@ -48,6 +48,8 @@
                             out.println("alert('You are successfully registered');");
                             out.println("</script>");
                             response.sendRedirect("edit_profile.jsp");
+                            // setting attribute to check later on.
+                            session.setAttribute("isloggedIn", "yes");
 
 
                             //Use JOptions instead to display the above message.

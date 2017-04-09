@@ -12,6 +12,7 @@
         <title>About Us | DiFo</title>
     </head>
     <body>
+        <%@include file="header.jsp" %>
         <h1>Welcome to DiFo! This is just the beginning.</h1>
     </body>
 </html>

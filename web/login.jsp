@@ -121,6 +121,9 @@
                     session.setAttribute("user_gender", gender);
 
             }
+            
+            // setting attribute to check later on.
+            session.setAttribute("isloggedIn", "yes");
             out.println("<script type=\"text/javascript\">");
                 out.println("alert('Successfully Logged In!!');");
                 out.println("location='chatwithus.jsp';");

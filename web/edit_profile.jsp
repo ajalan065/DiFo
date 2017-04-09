@@ -52,8 +52,9 @@
         
     </head>
     <body style="overflow-x: hidden;">
+        <%@include file="header.jsp" %>
         <%
-            String name=(String)session.getAttribute("user_name");
+            String uname=(String)session.getAttribute("user_name");
             String email=(String)session.getAttribute("user_email");
             String fname=(String)session.getAttribute("f_name");
             String mname=(String)session.getAttribute("m_name");
@@ -64,19 +65,7 @@
             String gender=(String)session.getAttribute("user_gender");
             
         %>
-        <div class="my-topnav my-card my-top my-light-grey" id="head">
-    	<a href="index.jsp" >DiFo</a>
-    	<!-- Nav tabs -->
-    	<ul class="nav nav-tabs" role="tablist" style="float: right;">
-      		<li role="presentation"><a href="index.jsp" aria-controls="home" role="tab" >Home</a></li>
-      		<li role="presentation"><a href="questions.jsp" aria-controls="messages" role="tab" >Questions</a></li>
-      		<li role="presentation"><a href="chat.jsp" aria-controls="settings" role="tab" >Chat</a></li>
-                <li role="presentation"><a href="users.jsp" aria-controls="profile" role="tab" >Users</a></li>
-                <li role="presentation"><a href="showprofile.jsp?param=me" aria-controls="profile" role="tab" >Profile</a></li>
-                <li role="presentation"><a href="aboutus.jsp" aria-controls="profile" role="tab" >About Us</a></li>
-                <li><button onclick="logout();">Logout</button></li>
-    	</ul>
-  	</div>
+        
         <h1 style="font-size: 1.5em; font-weight: bold; padding-left: 1.5em;"><em>Welcome <%out.println(name);%></em>. Edit your profile...</h1>
         <form method="post" action="upload_picture.jsp" enctype="multipart/form-data" id="prof_form" class="cd-form">
             
@@ -103,7 +92,7 @@
             <br>
             <p class="fieldset">
 		<label for="signup-username" id="lab">Username</label>
-                <input type="text" placeholder="<%out.println(name);%>" name="username" required style="width: 50%;" disabled>
+                <input type="text" placeholder="<%out.println(uname);%>" name="username" required style="width: 50%;" disabled>
 		
             </p>
             <br>
