@@ -23,35 +23,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <title>Users | DiFo</title>
         
-        <style type="text/css">
-    	<%@include file="assets/bootstrap/css/bootstrap.min.css" %>
-    	<%@include file="assets/css/form-elements.css" %>
-    	<%@include file="my.css" %>
-    	<%@include file="style.css" %>
-    	<%@include file="css/style.css" %>
-    	<%@include file="css/reset.css" %>
-    	<%@include file="font-awesome.min.css" %> 
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-            padding-top: 60px;
-        }
-
-	</style>
-        <script src="assets/js/jquery-1.11.1.min.js"></script>
-	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-	<script src="assets/js/jquery.backstretch.min.js"></script>
-	<script src="assets/js/scripts.js"></script>
-	<script src="js/modernizr.js"></script>
-        
         <script type="text/javascript" >
             function show_profile(username) {
                 window.location = "showprofile.jsp?param=" + username;
@@ -80,20 +51,56 @@
                 e.printStackTrace();
                 out.println(Constants.DATABASE_CONN_ERR);
             }
+            
+String uri = request.getRequestURI();
+            String pageName = uri.substring(uri.lastIndexOf("/")+1);
+            session.setAttribute("current_loc", pageName);
         %>
         <table id="user-table" >
+            <tr id="user-tr">
+                <td>First Name</td>
+                <td>Middle Name</td>
+                <td>Last Name</td>
+                <td>Status</td>
+                <td>Gender</td>   
+            </tr>
         <%
             
             if (userProfiles != null) {
                 for (User user : userProfiles) {
+                    String fname=null, mname=null, lname=null, status=null, gender=null;
+                    if (user.getFName()==null) {
+                        fname="";
+                    }
+                    else fname=user.getFName();
+                    
+                    if (user.getMName() == null) {
+                        mname="";
+                    }
+                    else mname=user.getMName();
+                    
+                    if (user.getLName() == null) {
+                        lname="";
+                    }
+                    else lname=user.getLName();
+                    
+                    if (user.getStatus() == null) {
+                        status="";
+                    }
+                    else status=user.getStatus();
+                    
+                    if (user.getGender()  == null) {
+                        gender="";
+                    }
+                    else gender=user.getGender();
         %>
         <tr id="user-tr">
             <td onclick="show_profile('<%= user.getUsername()%>')" style="cursor: pointer;"><%= user.getUsername()%></td>
-            <td><%= user.getFName()%></td>
-            <td><%= user.getMName()%></td>
-            <td><%= user.getLName()%></td>
-            <td><%= user.getStatus()%></td>
-            <td><%= user.getGender()%></td>
+            <td><%= fname%></td>
+            <td><%= mname%></td>
+            <td><%= lname%></td>
+            <td><%= status%></td>
+            <td><%= gender%></td>
         </tr>
         <%
                 }

@@ -64,6 +64,9 @@
             String filepath=(String)session.getAttribute("file_path");
             String gender=(String)session.getAttribute("user_gender");
             
+            String uri = request.getRequestURI();
+            String pageName = uri.substring(uri.lastIndexOf("/")+1);
+            session.setAttribute("current_loc", pageName);
         %>
         
         <h1 style="font-size: 1.5em; font-weight: bold; padding-left: 1.5em;"><em>Welcome <%out.println(name);%></em>. Edit your profile...</h1>

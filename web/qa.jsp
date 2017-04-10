@@ -66,6 +66,10 @@
                 text="Login";
             else
                 text="Logout";
+            
+                String uri = request.getRequestURI();
+            String pageName = uri.substring(uri.lastIndexOf("/")+1);
+            session.setAttribute("current_loc", pageName);
         %>
         
         <script type="text/javascript" >

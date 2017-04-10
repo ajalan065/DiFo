@@ -124,9 +124,10 @@
             
             // setting attribute to check later on.
             session.setAttribute("isloggedIn", "yes");
-            out.println("<script type=\"text/javascript\">");
+                request.removeAttribute("current_loc");
+                out.println("<script type=\"text/javascript\">");
                 out.println("alert('Successfully Logged In!!');");
-                out.println("location='chatwithus.jsp';");
+                out.println("location.replace(document.referrer);");
                 out.println("</script>");
             }
             else {

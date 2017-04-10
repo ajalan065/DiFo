@@ -46,8 +46,8 @@
                     if (i>0) {
                             out.println("<script type=\"text/javascript\">");
                             out.println("alert('You are successfully registered');");
+                            out.println("location.replace(document.referrer);");
                             out.println("</script>");
-                            response.sendRedirect("edit_profile.jsp");
                             // setting attribute to check later on.
                             session.setAttribute("isloggedIn", "yes");
 

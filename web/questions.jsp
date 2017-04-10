@@ -78,6 +78,9 @@
         
 
         <%
+            String uri = request.getRequestURI();
+            String pageName = uri.substring(uri.lastIndexOf("/")+1);
+            session.setAttribute("current_loc", pageName);
             List<Question> questions = null;
             try {
                 DBEngine dbengine = new DBEngine();
@@ -96,6 +99,7 @@
                 out.println(Constants.DATABASE_CONN_ERR);
             }
         %>
+       
         <div id="all-questions">
             <div id="ask-question">
                 <button onclick="ask_question('<%=text %>')" >Add Question</button> 

@@ -60,6 +60,10 @@
             String gender=null;
             String filepath=(String)session.getAttribute("file_path");
             User user = null;
+            String uri = request.getRequestURI();
+            String pageName = uri.substring(uri.lastIndexOf("/")+1);
+            session.setAttribute("current_loc", pageName);
+            
             try {            
                 if (param.equals("me")) {
                     name=(String)session.getAttribute("user_name");

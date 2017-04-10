@@ -1,17 +1,11 @@
-<%-- 
-    Document   : header.jsp
-    Created on : 10 Apr, 2017, 12:12:15 AM
-    Author     : ajalan
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.lang.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="javax.servlet.http.HttpSession"%>
 
-<!DOCTYPE html>
+
 <html>
-    <head>
+<head>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
 	<style type="text/css">
     	<%@include file="assets/bootstrap/css/bootstrap.min.css" %>
@@ -20,21 +14,8 @@
     	<%@include file="style.css" %>
     	<%@include file="css/style.css" %>
     	<%@include file="css/reset.css" %>
-    	<%@include file="font-awesome.min.css" %> 
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-            padding-top: 60px;
-        }
-
+    	<%@include file="font-awesome.min.css" %>
+     
 	</style>
 	<script src="assets/js/jquery-1.11.1.min.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
@@ -51,8 +32,7 @@
             else {
                 icon= "fa fa-user fa-lg";
             }
-            
-String usname=(String)session.getAttribute("user_name");
+            String usname=(String)session.getAttribute("user_name");
             String text;
             if(usname==null)
                 text="Login";
@@ -60,55 +40,115 @@ String usname=(String)session.getAttribute("user_name");
                 text="Logout";
         %>
         
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
         <body>
 
 	<div class="my-topnav my-card my-top my-light-grey" id="head">
-            <a href="index.jsp" >DiFo</a>
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist" style="float: right;">
-                    <li role="presentation"><a href="index.jsp" aria-controls="home" role="tab" >Home</a></li>
-                    <li role="presentation"><a href="questions.jsp" aria-controls="messages" role="tab" >Questions</a></li>
-                    <li role="presentation"><a onclick="seeChat('<%=text %>');" aria-controls="settings" role="tab" >Chat</a></li>
-                    <li role="presentation"><a href="users.jsp" aria-controls="profile" role="tab" >Users</a></li>
-                    <li role="presentation"><a href="showprofile.jsp?param=me" aria-controls="profile" role="tab" >Profile</a></li>
-                    <li role="presentation"><a href="aboutus.jsp" aria-controls="profile" role="tab" >About Us</a></li>
-                    <li><a onclick="func('<%=text %>');"><i class="<%out.println(icon);%>" style="color: darkcyan;"></i></a></li>
-            </ul>
+    	<a href="#" >DiFo</a>
+    	<!-- Nav tabs -->
+    	<ul class="nav nav-tabs" role="tablist" style="float: right;">
+      		<li role="presentation"><a href="index.jsp" aria-controls="home" role="tab" >Home</a></li>
+      		<li role="presentation"><a href="questions.jsp" aria-controls="messages" role="tab" >Questions</a></li>
+      		<li role="presentation"><a onclick="seeChat('<%=text %>');" aria-controls="settings" role="tab" >Chat</a></li>
+                <li role="presentation"><a href="users.jsp" aria-controls="profile" role="tab" >Users</a></li>
+                <li role="presentation"><a href="showprofile.jsp?param=me" aria-controls="profile" role="tab" >Profile</a></li>
+                <li role="presentation"><a href="aboutus.jsp" aria-controls="profile" role="tab" >About Us</a></li>
+                <!--<li><div class="main-nav"><a class="cd-signup" href="#0" data-modal-id="modal-register">Register</a></div></li>-->
+                <%
+                    if (session == null || session.getAttribute("isloggedIn") == null) {
+                        out.println("<li><div class='main-nav'><a id='001' class='cd-signup' href='#0' data-modal-id='modal-register'  style='background: transparent;'><i class='fa fa-user-plus fa-lg' style='color: darkcyan;'></i></a></div></li>");
+                    }
+                    else {
+                        //out.println("<li><div class='main-nav'><a class='cd-signup' style='background: transparent;'><i class='fa fa-user fa-lg' style='color: darkcyan;'></i></a></div></li>");
+                        out.println("<li><div class='dropdown'><a class='dropbtn' onclick='openMenu()' style='border: none;'><i class='fa fa-user fa-lg' style='color: darkcyan;'></i></a>");
+                        out.println("<div class='dropdown-content' id='dropdown-content' style='background: transparent;'>");
+                        out.println("<ul>");
+                        out.println("<li><a style='padding: 10px 20px; display: block; opacity: 1; border-bottom: 1px solid ghostwhite;' href='edit_profile.jsp'>Edit Profile</a></li>");
+                        out.println("<li><a style='padding: 10px 20px; display: block;  opacity: 1; border-bottom: 1px solid ghostwhite;' href='logout.jsp'>Logout</a></li>");
+                        out.println("</ul></div></div>");
+                    }
+                %>
+    	</ul>
   	</div>
-        
-        <div id="id01" class="modal"> <!-- log in form -->
-            <div class="cd-user-modal-container">
-            <form class="cd-form" action="login.jsp" method="post">
-		<p class="fieldset">
-		<label class="image-replace cd-email" for="signin-email">E-mail</label>
-                <input name="email" class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
-		<span class="cd-error-message">Error message here!</span>
-		</p>
 
-		<p class="fieldset">
-		<label class="image-replace cd-password" for="signin-password">Password</label>
-		<input class="full-width has-padding has-border" id="signin-password" type="password"  placeholder="Password" name="password">
-		<a href="#0" class="hide-password">Show</a>
-		<span class="cd-error-message">Error message here!</span>
-		</p>
+	<div class="cd-user-modal"> <!-- this is the entire modal form, including the background -->
+		<div class="cd-user-modal-container"> <!-- this is the container wrapper -->
+			<ul class="cd-switcher">
+				<li><a href="#0">Sign in</a></li>
+				<li><a href="#0">New account</a></li>
+			</ul>
 
-		<p class="fieldset">
-		<input type="checkbox" id="remember-me" checked>
-		<label for="remember-me">Remember me</label>
-		</p>
+			<div id="cd-login"> <!-- log in form -->
+                            <form class="cd-form" action="login.jsp" method="post">
+					<p class="fieldset">
+						<label class="image-replace cd-email" for="signin-email">E-mail</label>
+						<input name="email" class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
+						<span class="cd-error-message">Error message here!</span>
+					</p>
 
-                <p class="fieldset">
-		<button class="full-width" id="login_form" onclick="login_form_submit()" type="submit">Login</button>
-		</p>
-            </form>
+					<p class="fieldset">
+						<label class="image-replace cd-password" for="signin-password">Password</label>
+						<input class="full-width has-padding has-border" id="signin-password" type="password"  placeholder="Password" name="password">
+						<a href="#0" class="hide-password">Show</a>
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+                                        
+
+					<p class="fieldset">
+						<input type="checkbox" id="remember-me" checked>
+						<label for="remember-me">Remember me</label>
+					</p>
+
+					<p class="fieldset">
+						<button class="full-width" id="login_form" onclick="login_form_submit()" type="submit">Login</button>
+					</p>
+				</form>
 				
-            <p class="cd-form-bottom-message"><a href="#0">Forgot your password?</a></p>
-            
-            <div id="cd-reset-password"> <!-- reset password form -->
+				<p class="cd-form-bottom-message"><a href="#0">Forgot your password?</a></p>
+				<!-- <a href="#0" class="cd-close-form">Close</a> -->
+			</div> <!-- cd-login -->
+			<div id="cd-signup"> <!-- sign up form -->
+				<form class="cd-form" action="register.jsp" method="post">
+					<p class="fieldset">
+						<label class="image-replace cd-username" for="signup-username">Username</label>
+						<input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username" name="username" required>
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<label class="image-replace cd-email" name="user_email" for="signup-email">E-mail</label>
+						<input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail" name="email" required>
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<label class="image-replace cd-password" for="signup-password">Password</label>
+						<input class="full-width has-padding has-border" id="signup-password" type="password"  placeholder="Password" name="password" required onkeyup="return password_check();">
+						<a href="#0" class="hide-password">Show</a>
+						<span class="cd-error-message">Error message here!</span>
+                                                <span id="check">Type Password</span>
+					</p>
+                                        
+                                        <p class="fieldset">
+						<label class="image-replace cd-password" for="signup-password">Password</label>
+						<input class="full-width has-padding has-border" id="signup-password-confirm" type="password"  placeholder="Confirm Password" name="check_password" onchange="check()" required>
+						<a href="#0" class="hide-password">Show</a>
+						<span class="cd-error-message">Error message here!</span>
+					</p>
+
+					<p class="fieldset">
+						<input type="checkbox" id="accept-terms" required>
+						<label for="accept-terms">I agree to the <a target="_blank" href="terms.html">Terms</a></label>
+					</p>
+
+					<p class="fieldset">
+						<button onclick="reg_form_submit()" id="reg_form" class="full-width has-padding" type="submit">Create account</button>
+					</p>
+				</form>
+
+				<a href="#0" class="cd-close-form">Close</a>
+			</div> <!-- cd-signup -->
+
+			<div id="cd-reset-password"> <!-- reset password form -->
 				<p class="cd-form-message">Lost your password? Please enter your email address. You will receive a link to create a new password.</p>
 
 				<form class="cd-form">
@@ -126,8 +166,10 @@ String usname=(String)session.getAttribute("user_name");
 				<p class="cd-form-bottom-message"><a href="#0">Back to log-in</a></p>
 			</div> <!-- cd-reset-password -->
 			<a href="#0" class="cd-close-form">Close</a>
-            </div>            
-	</div> 
+		</div> <!-- cd-user-modal-container -->
+                
+	</div> <!-- cd-user-modal -->
+        
 
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -170,30 +212,27 @@ String usname=(String)session.getAttribute("user_name");
                 }
             }
             
-            function func(text) {
-           if(text==="Logout")
-                window.location="logout.jsp";
-           else if(text==="Login")
-                document.getElementById('id01').style.display='block';
-        }
-        
-        function seeChat(text) {
-            if(text==="Logout")
-                window.location="chatwithus.jsp";
-           else if(text==="Login") {
-               alert('You must login to continue..');
-                document.getElementById('id01').style.display='block';
+            function seeChat(text) {
+                if(text==="Logout")
+                    window.location="chatwithus.jsp";
+                else if(text==="Login") {
+                    alert('You must login to continue..');
+                    document.getElementById('id001').style.display='block';
+                }
             }
-        }
-        var modal = document.getElementById('id01');
-        window.onclick = function(event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        }
             
-    
-        </script>
+            /* When the user clicks on the button, 
+            toggle between hiding and showing the dropdown content */
+            function openMenu() {
+                if(document.getElementById("dropdown-content").style.display=='block') {
+                document.getElementById("dropdown-content").style.display='none';
+            }
+            else {
+                document.getElementById("dropdown-content").style.display='block';
+            }
+            }
+
+           
+    </script>
 </body>
-    </body>
 </html>

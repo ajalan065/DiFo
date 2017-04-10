@@ -50,6 +50,9 @@ function reloadChat () {
 </script>
 <%
     String name = (String)session.getAttribute("user_name");
+    String uri = request.getRequestURI();
+            String pageName = uri.substring(uri.lastIndexOf("/")+1);
+            session.setAttribute("current_loc", pageName);
     %>
       
     </head>
