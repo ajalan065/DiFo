@@ -54,7 +54,7 @@
     <body style="overflow-x: hidden;">
         <%@include file="header.jsp" %>
         <%
-            String uname=(String)session.getAttribute("user_name");
+            String name=(String)session.getAttribute("user_name");
             String email=(String)session.getAttribute("user_email");
             String fname=(String)session.getAttribute("f_name");
             String mname=(String)session.getAttribute("m_name");
@@ -92,7 +92,7 @@
             <br>
             <p class="fieldset">
 		<label for="signup-username" id="lab">Username</label>
-                <input type="text" placeholder="<%out.println(uname);%>" name="username" required style="width: 50%;" disabled>
+                <input type="text" placeholder="<%out.println(name);%>" name="username" required style="width: 50%;" disabled>
 		
             </p>
             <br>

@@ -43,7 +43,7 @@
         else {
         }
         
-               String filePath= getServletContext().getRealPath("assets/img/")
+               String filePath= getServletContext().getRealPath("/assets/img/")
                        +File.separator;
         /*String filePath = System.getProperty("user.dir")+File.separator
                 +dir+File.separator;*/
