@@ -4,6 +4,7 @@
     Author     : arka
 --%>
 
+<%@page import="DBControl.QuestionsTagDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.lang.*"%>
 <%@page import="java.sql.*"%>
@@ -28,9 +29,12 @@
             QuestionDAO questionDAO = new QuestionDAO(con);
             TagDAO tagDAO = new TagDAO(con);
             
-            int res = questionDAO.insertQuestion(head, body, username); // keep dummy username for now
-            tagDAO.insertTag(tags);
+            int res = questionDAO.insertQuestion(head, body, username); 
             if (res > 0) {
+                int qid;
+                qid = questionDAO.getLastInsertId();
+                tagDAO.insertTag(tags, qid);
+                
                 response.sendRedirect("questions.jsp");
             } else  {
                 out.println(Constants.QUES_NOT_POSTED_ERR);

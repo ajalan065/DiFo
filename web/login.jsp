@@ -105,10 +105,6 @@
                     session.setAttribute("user_picture", picture);
 
             }
-            else {
-                String picture = "../web/assets/img/profile.png";
-                session.setAttribute("user_picture", picture);
-            }
             
             // for gender
             String q7="SELECT gender from " + Constants.DB_TABLE_USER + " WHERE email='"+email+"'";

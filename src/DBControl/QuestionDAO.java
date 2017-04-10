@@ -101,6 +101,7 @@ public class QuestionDAO {
         String query = "SELECT MAX(id) AS id FROM " + TABLE;
         PreparedStatement ps = connection.prepareStatement(query);
         ResultSet rst = ps.executeQuery();
+        rst.next();
         return rst.getInt("id");
     }
 }
