@@ -4,6 +4,8 @@
     Author     : arka
 --%>
 
+<%@page import="model.User"%>
+<%@page import="DBControl.UserDAO"%>
 <%@page import="DBControl.QuestionsTagDAO"%>
 <%@page import="model.Tag"%>
 <%@page import="java.util.List"%>
@@ -134,6 +136,7 @@
         
 
         <%
+            String filepath = (String)session.getAttribute("file_path");
             String uri = request.getRequestURI();
             String pageName = uri.substring(uri.lastIndexOf("/")+1);
             session.setAttribute("current_loc", pageName);
@@ -199,7 +202,11 @@
                                 <div class="user-gravatar32">
                                     <a onclick="" >
                                         <div class="gravatar-wrapper-32">
-                                            <img src="https://www.gravatar.com/avatar/9f460ae7deb6fa19034c810a53b9fbac?s=32&amp;d=identicon&amp;r=PG" alt="" width="32" height="32">
+                                            <%
+                                                UserDAO userDAO = new UserDAO(con);
+                                                User user  = userDAO.getUserProfileByUsername(question.getUsername());
+                                            %>
+                                            <img src="<%out.println(filepath+user.getPicture());%>" alt="" width="32" height="32">
                                         </div>
                                     </a>
                                 </div>
