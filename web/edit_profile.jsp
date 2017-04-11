@@ -51,7 +51,7 @@
         
         
     </head>
-    <body style="overflow-x: hidden;">
+    <body style="overflow-x: hidden;" >
         <%@include file="header.jsp" %>
         <%
             String name=(String)session.getAttribute("user_name");

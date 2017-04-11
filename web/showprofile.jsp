@@ -111,7 +111,7 @@
             }
         %>
     </head>
-    <body>
+    <body  style="background: url('assets/img/talk2.png'); background-size: cover;">
         <%@include file="header.jsp" %>
         
             <div class="container">

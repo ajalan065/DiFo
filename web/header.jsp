@@ -63,7 +63,6 @@
                 <li role="presentation"><a href="users.jsp" aria-controls="profile" role="tab" >Users</a></li>
                 <li role="presentation"><a onmouseover="seeAllTags()" onmouseout="hideAllTags()" aria-controls="profile" role="tab" >Tags</a></li>  
                 <li role="presentation"><a onclick="seeProfile('<%=text %>');" aria-controls="profile" role="tab" >Profile</a></li>
-                <li role="presentation"><a href="aboutus.jsp" aria-controls="profile" role="tab" >About Us</a></li>
                 <!--<li><div class="main-nav"><a class="cd-signup" href="#0" data-modal-id="modal-register">Register</a></div></li>-->
                 <%
                     if (session == null || session.getAttribute("isloggedIn") == null) {

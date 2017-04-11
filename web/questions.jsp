@@ -163,7 +163,7 @@
        
         <div id="all-questions">
             <div id="ask-question">
-                <button onclick="ask_question('<%=text %>')" >Add Question</button> 
+                <button onclick="ask_question('<%=text %>')" style="float:left;border: none;background-color: Transparent;"><i class='fa fa-plus-square fa-4x' style='color: darkcyan;'></i></button> 
             </div>
         </div>
         <div id="questions">

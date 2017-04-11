@@ -59,18 +59,7 @@
             }
         </style>
         
-        <%
-            String name=(String)session.getAttribute("user_name");
-            String text;
-            if(name==null)
-                text="Login";
-            else
-                text="Logout";
-            
-                String uri = request.getRequestURI();
-            String pageName = uri.substring(uri.lastIndexOf("/")+1);
-            session.setAttribute("current_loc", pageName);
-        %>
+       
         
         <script type="text/javascript" >
             function add_answer(text) {
@@ -83,21 +72,9 @@
             }
         </script>
     </head>
-    <body>
+    <body  style="background: url('assets/img/talk2.png'); background-size: cover;">
         
-        <div class="my-topnav my-card my-top my-light-grey" id="head">
-            <a href="index.jsp" >DiFo</a>
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist" style="float: right;">
-                    <li role="presentation"><a href="index.jsp" aria-controls="home" role="tab" >Home</a></li>
-                    <li role="presentation"><a href="questions.jsp" aria-controls="messages" role="tab" >Questions</a></li>
-                    <li role="presentation"><a href="chat.jsp" aria-controls="settings" role="tab" >Chat</a></li>
-                    <li role="presentation"><a href="users.jsp" aria-controls="profile" role="tab" >Users</a></li>
-                    <li role="presentation"><a href="showprofile.jsp?param=me" aria-controls="profile" role="tab" >Profile</a></li>
-                    <li role="presentation"><a href="aboutus.jsp" aria-controls="profile" role="tab" >About Us</a></li>
-                    <li><button onclick="logout();">Logout</button></li>
-            </ul>
-  	</div>
+        <%@include file="header.jsp" %>
         
         <%
             Question question = null;

@@ -51,7 +51,7 @@
         </style>
     </head>
         
-    <body onload="init()">
+    <body onload="init()"  style="background: url('assets/img/talk2.png'); background-size: cover;">
         <%@include file="header.jsp" %>
             
         <%
