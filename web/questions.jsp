@@ -166,61 +166,59 @@
                 <button onclick="ask_question('<%=text %>')" >Add Question</button> 
             </div>
         </div>
-            <div id="questions">
-                <%
-                    if(questions != null) {
-                        for (Question question : questions) {
-                            int id = question.getId();
-                %>
-                
-                <div class="question-summary">
-                
-                    <div class="summary">
-                        <h2><a style="font-size: 1.5em;" onclick="open_thread(<%= id %>)" class="question-hyperlink"><%= question.getHead() %></a></h2>
-                        <div class="excerpt">
-                            <%= question.getBody() %>
-                        </div>          
-                        <div class="tags t-ruby-on-rails t-config t-ruby-on-rails-5 t-production t-secret-key">
-                            <%
-                                QuestionsTagDAO questionsTagDAO = new QuestionsTagDAO(con);
-                                List<Tag> tags = questionsTagDAO.getTagsByQid(id);
-                                for (Tag tag : tags) {
-                            %>
-                            <a><%= tag.getName() %></a>
-                            <%
-                                }
-                            %>
-                        </div>
-                        &nbsp;
-                        <div class="started fr">
-                            <div class="user-info ">
-                                <div class="user-action-time">
-                                    asked by <span class="user-details">
-                                    <a><%= question.getUsername() %></a> &nbsp; <%= question.getTimestamp() %>
-                                    </span>
-                                </div>
-                                <div class="user-gravatar32">
-                                    <a onclick="" >
-                                        <div class="gravatar-wrapper-32">
-                                            <%
-                                                UserDAO userDAO = new UserDAO(con);
-                                                User user  = userDAO.getUserProfileByUsername(question.getUsername());
-                                            %>
-                                            <img src="<%out.println(filepath+user.getPicture());%>" alt="" width="32" height="32">
-                                        </div>
-                                    </a>
-                                </div>
+        <div id="questions">
+            <%
+                if(questions != null) {
+                    for (Question question : questions) {
+                        int id = question.getId();
+            %>
 
+            <div class="question-summary">
 
-                            </div>
-                        </div>  
+                <div class="summary">
+                    <h2><a style="font-size: 1.5em;" onclick="open_thread(<%= id %>)" class="question-hyperlink"><%= question.getHead() %></a></h2>
+                    <div class="excerpt">
+                        <%= question.getBody() %>
+                    </div>          
+                    <div class="tags t-ruby-on-rails t-config t-ruby-on-rails-5 t-production t-secret-key">
+                        <%
+                            QuestionsTagDAO questionsTagDAO = new QuestionsTagDAO(con);
+                            List<Tag> tags = questionsTagDAO.getTagsByQid(id);
+                            for (Tag tag : tags) {
+                        %>
+                        <a><%= tag.getName() %></a>
+                        <%
+                            }
+                        %>
                     </div>
+                    &nbsp;
+                    <div class="started fr">
+                        <div class="user-info ">
+                            <div class="user-action-time">
+                                asked by <span class="user-details">
+                                <a><%= question.getUsername() %></a> &nbsp; <%= question.getTimestamp() %>
+                                </span>
+                            </div>
+                            <div class="user-gravatar32">
+                                <a onclick="" >
+                                    <div class="gravatar-wrapper-32">
+                                        <%
+                                            UserDAO userDAO = new UserDAO(con);
+                                            User user  = userDAO.getUserProfileByUsername(question.getUsername());
+                                        %>
+                                        <img src="<%out.println(filepath+user.getPicture());%>" alt="" width="32" height="32">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>  
                 </div>
-                            
-                <%
-                        }
-                    }
-                %>
             </div>
+
+            <%
+                    }
+                }
+            %>
+        </div>
     </body>
 </html>

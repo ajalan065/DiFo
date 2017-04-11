@@ -1,3 +1,5 @@
+<%@page import="java.nio.file.Paths"%>
+<%@page import="java.io.File"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.lang.*"%>
 <%@page import="java.sql.*"%>
@@ -24,6 +26,8 @@
 	<script src="js/modernizr.js"></script>
         
         <%
+            String session_filePath= Paths.get("assets/img")+File.separator;
+            session.setAttribute("file_path", session_filePath);
             String isLoggedIn = (String)session.getAttribute("isloggedIn");
             String icon=null;
             if(session == null || session.getAttribute("isloggedIn") == null) {
@@ -43,15 +47,15 @@
         <body>
 
 	<div class="my-topnav my-card my-top my-light-grey" id="head">
-    	<a href="#" >DiFo</a>
+    	<a href="index.jsp" ><img src="assets/img/difo.png" alt="DiFo" style="width:70px;height:40px;"></a>
     	<!-- Nav tabs -->
     	<ul class="nav nav-tabs" role="tablist" style="float: right;">
-      		<li role="presentation"><a href="index.jsp" aria-controls="home" role="tab" >Home</a></li>
+      		<!--<li role="presentation"><a href="index.jsp" aria-controls="home" role="tab" >Home</a></li>-->
       		<li role="presentation"><a href="questions.jsp" aria-controls="messages" role="tab" >Questions</a></li>
       		<li role="presentation"><a onclick="seeChat('<%=text %>');" aria-controls="settings" role="tab" >Chat</a></li>
                 <li role="presentation"><a href="users.jsp" aria-controls="profile" role="tab" >Users</a></li>
                 <li role="presentation"><a href="tags.jsp" aria-controls="profile" role="tab" >Tags</a></li>  
-                <li role="presentation"><a href="showprofile.jsp?param=me" aria-controls="profile" role="tab" >Profile</a></li>
+                <li role="presentation"><a onclick="seeProfile('<%=text %>');" aria-controls="profile" role="tab" >Profile</a></li>
                 <li role="presentation"><a href="aboutus.jsp" aria-controls="profile" role="tab" >About Us</a></li>
                 <!--<li><div class="main-nav"><a class="cd-signup" href="#0" data-modal-id="modal-register">Register</a></div></li>-->
                 <%
@@ -216,6 +220,15 @@
             function seeChat(text) {
                 if(text==="Logout")
                     window.location="chatwithus.jsp";
+                else if(text==="Login") {
+                    alert('You must login to continue..');
+                    document.getElementById('id001').style.display='block';
+                }
+            }
+            
+            function seeProfile(text) {
+                if(text==="Logout")
+                    window.location="showprofile.jsp?param=me";
                 else if(text==="Login") {
                     alert('You must login to continue..');
                     document.getElementById('id001').style.display='block';

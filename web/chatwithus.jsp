@@ -42,12 +42,17 @@
         </style>
         <script language="javascript" type="text/javascript">
 
-var timeout = setInterval(reloadChat, 1000);    
-function reloadChat () {
+            var timeout = setInterval(reloadChat, 1000);    
+            function reloadChat () {
 
-     $('#chatbox').load('chat.jsp');
-}
-</script>
+                 $('#chatbox').load('chat.jsp');
+
+            }
+            function init() {
+                var objDiv = document.getElementById("chatbox");
+                objDiv.scrollTop = objDiv.scrollHeight;
+            }
+        </script>
 <%
     String name = (String)session.getAttribute("user_name");
     String uri = request.getRequestURI();
@@ -56,7 +61,7 @@ function reloadChat () {
     %>
       
     </head>
-<body>
+<body onload="init()">
     
             <div id="wrapper">
             <div id="menu">
@@ -68,9 +73,9 @@ function reloadChat () {
                 <div id="chatbox">
                     
                 </div>
-                <script>
-$( "#chatbox" ).load( "chat.jsp" );
-</script>
+            <script>
+                $( "#chatbox" ).load( "chat.jsp" );
+            </script>
    
         
 <div id="inputs">

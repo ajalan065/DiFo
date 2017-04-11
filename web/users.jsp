@@ -4,6 +4,9 @@
     Author     : arka
 --%>
 
+<%@page import="java.awt.Toolkit"%>
+<%@page import="java.awt.Dimension"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="DBControl.UserDAO"%>
 <%@page import="model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -27,10 +30,22 @@
             function show_profile(username) {
                 window.location = "showprofile.jsp?param=" + username;
             }
+            function init() {
+                var screenWidth = screen.width;
+            }
         </script>
+        
+        <style type="text/css">
+            .users-page #user-browser, .users-page #user-browser table {
+                width: 100%;
+            }
+            .users-page #user-browser {
+                margin-top: -15px;
+            }
+        </style>
     </head>
         
-    <body>
+    <body onload="init()">
         <%@include file="header.jsp" %>
             
         <%
@@ -52,60 +67,62 @@
                 out.println(Constants.DATABASE_CONN_ERR);
             }
             
-String uri = request.getRequestURI();
+            String uri = request.getRequestURI();
             String pageName = uri.substring(uri.lastIndexOf("/")+1);
             session.setAttribute("current_loc", pageName);
-        %>
-        <table id="user-table" >
-            <tr id="user-tr">
-                <td>First Name</td>
-                <td>Middle Name</td>
-                <td>Last Name</td>
-                <td>Status</td>
-                <td>Gender</td>   
-            </tr>
-        <%
             
-            if (userProfiles != null) {
+//            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//            out.println("width=" + screenSize.getWidth());
+            
+            List<List<User>> userRows = null;
+            if(userProfiles != null) {
+                userRows = new ArrayList<>();
+                List<User> row = new ArrayList<>();
+                int count = 0;
                 for (User user : userProfiles) {
-                    String fname=null, mname=null, lname=null, status=null, gender=null;
-                    if (user.getFName()==null) {
-                        fname="";
+                    if(count%4 == 0 && count != 0) {
+                        userRows.add(row);
+                        row = null;
+                        row = new ArrayList<>();
                     }
-                    else fname=user.getFName();
-                    
-                    if (user.getMName() == null) {
-                        mname="";
-                    }
-                    else mname=user.getMName();
-                    
-                    if (user.getLName() == null) {
-                        lname="";
-                    }
-                    else lname=user.getLName();
-                    
-                    if (user.getStatus() == null) {
-                        status="";
-                    }
-                    else status=user.getStatus();
-                    
-                    if (user.getGender()  == null) {
-                        gender="";
-                    }
-                    else gender=user.getGender();
+                    row.add(user);
+                    count++;
+                }
+                if(row != null) {
+                    userRows.add(row);
+                }
+            }
+            %>
+            <div id="user-browser">
+            <table>
+                <tbody>
+            <%
+            if (userRows != null) {
+                for(int i=0;i<userRows.size();i++) {
+                    out.println("<tr>");
+                    for(int j=0;j<userRows.get(i).size();j++) {
+                        User user = userRows.get(i).get(j);
+                        String picture = user.getPicture();
         %>
-        <tr id="user-tr">
-            <td onclick="show_profile('<%= user.getUsername()%>')" style="cursor: pointer;"><%= user.getUsername()%></td>
-            <td><%= fname%></td>
-            <td><%= mname%></td>
-            <td><%= lname%></td>
-            <td><%= status%></td>
-            <td><%= gender%></td>
-        </tr>
+        <td>
+            <div class="user-info  user-hover">
+                <div class="user-gravatar48">
+                    <a><div class="gravatar-wrapper-48"><img src="<%out.println((String)session.getAttribute("file_path") + picture);%>" alt="" width="48" height="48"></div></a>
+                </div>
+                <div class="user-details">
+                    <a onclick="show_profile('<%= user.getUsername()%>');" ><%= user.getUsername()%></a>
+                    
+                </div>
+                
+            </div>
+        </td>
         <%
+                    }
+                    out.println("</tr>");
                 }
             }
         %>
-        </table>
+        </tbody></table>
+            </div>
     </body>
 </html>
