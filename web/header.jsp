@@ -54,7 +54,7 @@
       		<li role="presentation"><a href="questions.jsp" aria-controls="messages" role="tab" >Questions</a></li>
       		<li role="presentation"><a onclick="seeChat('<%=text %>');" aria-controls="settings" role="tab" >Chat</a></li>
                 <li role="presentation"><a href="users.jsp" aria-controls="profile" role="tab" >Users</a></li>
-                <li role="presentation"><a href="showprofile.jsp?param=me" aria-controls="profile" role="tab" >Profile</a></li>
+                <li role="presentation"><a onclick="seeProfile('<%=text %>');" aria-controls="profile" role="tab" >Profile</a></li>
                 <li role="presentation"><a href="aboutus.jsp" aria-controls="profile" role="tab" >About Us</a></li>
                 <!--<li><div class="main-nav"><a class="cd-signup" href="#0" data-modal-id="modal-register">Register</a></div></li>-->
                 <%
@@ -219,6 +219,15 @@
             function seeChat(text) {
                 if(text==="Logout")
                     window.location="chatwithus.jsp";
+                else if(text==="Login") {
+                    alert('You must login to continue..');
+                    document.getElementById('id001').style.display='block';
+                }
+            }
+            
+            function seeProfile(text) {
+                if(text==="Logout")
+                    window.location="showprofile.jsp?param=me";
                 else if(text==="Login") {
                     alert('You must login to continue..');
                     document.getElementById('id001').style.display='block';
