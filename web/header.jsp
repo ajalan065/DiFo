@@ -31,6 +31,7 @@
 	<script src="assets/js/scripts.js"></script>
 	<script src="js/modernizr.js"></script>
         
+        
         <%
             String session_filePath= Paths.get("assets/img")+File.separator;
             session.setAttribute("file_path", session_filePath);
@@ -51,7 +52,7 @@
         %>
         
         <body>
-
+            <%@include file="tags.jsp" %>
 	<div class="my-topnav my-card my-top my-light-grey" id="head">
     	<a href="index.jsp" id="head_img"><img src="assets/img/difo.png" alt="DiFo" style="width:70px;height:40px; float: left; padding-left: 5px;"></a>
     	<!-- Nav tabs -->
@@ -60,7 +61,7 @@
       		<li role="presentation"><a href="questions.jsp" aria-controls="messages" role="tab" >Questions</a></li>
       		<li role="presentation"><a onclick="seeChat('<%=text %>');" aria-controls="settings" role="tab" >Chat</a></li>
                 <li role="presentation"><a href="users.jsp" aria-controls="profile" role="tab" >Users</a></li>
-                <li role="presentation"><a href="tags.jsp" aria-controls="profile" role="tab" >Tags</a></li>  
+                <li role="presentation"><a onmouseover="seeAllTags()" onmouseout="hideAllTags()" aria-controls="profile" role="tab" >Tags</a></li>  
                 <li role="presentation"><a onclick="seeProfile('<%=text %>');" aria-controls="profile" role="tab" >Profile</a></li>
                 <li role="presentation"><a href="aboutus.jsp" aria-controls="profile" role="tab" >About Us</a></li>
                 <!--<li><div class="main-nav"><a class="cd-signup" href="#0" data-modal-id="modal-register">Register</a></div></li>-->
@@ -80,7 +81,22 @@
                 %>
     	</ul>
   	</div>
-
+        
+        <div class="my-topnav my-card my-top my-light-grey" id="table" style="border:none; display: none;">
+    	
+    	<ul class="nav nav-tabs" role="tablist" style="float: right; display: none;" id="table1">
+      		<% 
+                    if(tags2!=null){
+                        for(Tag tag : tags2){              
+                %>
+      		<li role="presentation"><a href="#" aria-controls="messages" role="tab" ><%= tag.getName() %></a></li>
+      		<% }
+            }
+            %>
+                
+    	</ul>
+  	</div>
+            
 	<div class="cd-user-modal"> <!-- this is the entire modal form, including the background -->
 		<div class="cd-user-modal-container"> <!-- this is the container wrapper -->
 			<ul class="cd-switcher">
@@ -250,6 +266,18 @@
             else {
                 document.getElementById("dropdown-content").style.display='block';
             }
+            }
+            
+             function seeAllTags() {
+               
+                document.getElementById("table1").style.display='block';
+                document.getElementById("table").style.display='block';
+            }
+            
+            function hideAllTags() {
+                    
+                document.getElementById("table1").style.display='none';
+                document.getElementById("table").style.display='none';
             }
 
            

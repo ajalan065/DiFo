@@ -27,21 +27,17 @@
         <title>Tags | DiFo</title>
     </head>
     <body>
-        <%@include file="header.jsp" %>
         <%
-            String uri = request.getRequestURI();
-            String pageName = uri.substring(uri.lastIndexOf("/")+1);
-            session.setAttribute("current_loc", pageName);
-            List<Tag> tags = null;
-            DBEngine dbengine = null;
-            Connection con =null;
+            List<Tag> tags2 = null;
+            DBEngine dbengine2 = null;
+            Connection con2 =null;
             try {
-                dbengine = new DBEngine();
-                dbengine.establishConnection();
+                dbengine2 = new DBEngine();
+                dbengine2.establishConnection();
                 try {
-                    con = dbengine.getConnection();
-                    TagDAO tagDAO = new TagDAO(con);
-                    tags = tagDAO.getTags();
+                    con2 = dbengine2.getConnection();
+                    TagDAO tagDAO = new TagDAO(con2);
+                    tags2 = tagDAO.getTags();
                 } catch(Exception ex) {
                     ex.printStackTrace();
                     out.println(Constants.DATABASE_CONN_ERR);
@@ -53,24 +49,12 @@
             }
         %>
         
-        <div id="Tags Table">
-            <table style="width:100%" border="1">
-                <tr>
-                    <th>Tag Name</th>
-                </tr>
-                <% 
-                    if(tags!=null){
-                        for(Tag tag : tags){              
-                %>
-                <tr>
-                    <td><%= tag.getName() %></td>
-                </tr>
-                  <% }
-            }
-            %>
-            </table>
-        </div>
+        
             
+        
+            <script>
+               
+            </script>
     </body>
 </html>
 
