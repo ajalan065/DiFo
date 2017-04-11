@@ -30,6 +30,9 @@
             function show_profile(username) {
                 window.location = "showprofile.jsp?param=" + username;
             }
+            function init() {
+                var screenWidth = screen.width;
+            }
         </script>
         
         <style type="text/css">
@@ -42,7 +45,7 @@
         </style>
     </head>
         
-    <body>
+    <body onload="init()">
         <%@include file="header.jsp" %>
             
         <%

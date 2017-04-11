@@ -47,10 +47,10 @@
         <body>
 
 	<div class="my-topnav my-card my-top my-light-grey" id="head">
-    	<a href="#" >DiFo</a>
+    	<a href="index.jsp" ><img src="assets/img/difo.png" alt="DiFo" style="width:70px;height:40px;"></a>
     	<!-- Nav tabs -->
     	<ul class="nav nav-tabs" role="tablist" style="float: right;">
-      		<li role="presentation"><a href="index.jsp" aria-controls="home" role="tab" >Home</a></li>
+      		<!--<li role="presentation"><a href="index.jsp" aria-controls="home" role="tab" >Home</a></li>-->
       		<li role="presentation"><a href="questions.jsp" aria-controls="messages" role="tab" >Questions</a></li>
       		<li role="presentation"><a onclick="seeChat('<%=text %>');" aria-controls="settings" role="tab" >Chat</a></li>
                 <li role="presentation"><a href="users.jsp" aria-controls="profile" role="tab" >Users</a></li>
