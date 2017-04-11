@@ -17,7 +17,13 @@
     	<%@include file="css/style.css" %>
     	<%@include file="css/reset.css" %>
     	<%@include file="font-awesome.min.css" %>
-     
+        a {
+            text-decoration: none !important;
+        }
+        a:hover {
+            text-decoration: none !important;
+            background: transparent !important;
+        }
 	</style>
 	<script src="assets/js/jquery-1.11.1.min.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
@@ -47,7 +53,7 @@
         <body>
 
 	<div class="my-topnav my-card my-top my-light-grey" id="head">
-    	<a href="index.jsp" ><img src="assets/img/difo.png" alt="DiFo" style="width:70px;height:40px; float: left; padding-left: 5px;"></a>
+    	<a href="index.jsp" id="head_img"><img src="assets/img/difo.png" alt="DiFo" style="width:70px;height:40px; float: left; padding-left: 5px;"></a>
     	<!-- Nav tabs -->
     	<ul class="nav nav-tabs" role="tablist" style="float: right;">
       		<!--<li role="presentation"><a href="index.jsp" aria-controls="home" role="tab" >Home</a></li>-->

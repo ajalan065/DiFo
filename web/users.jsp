@@ -42,6 +42,12 @@
             .users-page #user-browser {
                 margin-top: -15px;
             }
+            
+            #user_pic {
+                border-radius: 50%;
+                width: 4em;
+                height: 4em;
+            }
         </style>
     </head>
         
@@ -76,7 +82,7 @@
             
             List<List<User>> userRows = null;
             if(userProfiles != null) {
-                userRows = new ArrayList<>();
+                userRows = new ArrayList<List<User>>();
                 List<User> row = new ArrayList<User>();
                 int count = 0;
                 for (User user : userProfiles) {
@@ -104,10 +110,10 @@
                         User user = userRows.get(i).get(j);
                         String picture = user.getPicture();
         %>
-        <td>
+        <td style="padding-left: 9em; padding-top: 2em;">
             <div class="user-info  user-hover">
                 <div class="user-gravatar48">
-                    <a><div class="gravatar-wrapper-48"><img src="<%out.println((String)session.getAttribute("file_path") + picture);%>" alt="" width="48" height="48"></div></a>
+                    <a><div class="gravatar-wrapper-48"><img src="<%out.println((String)session.getAttribute("file_path") + picture);%>" alt="user_pic" id="user_pic"></div></a>
                 </div>
                 <div class="user-details">
                     <a onclick="show_profile('<%= user.getUsername()%>');" ><%= user.getUsername()%></a>
