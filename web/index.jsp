@@ -10,19 +10,23 @@
     
     <style type="text/css">
         <%@include file="css/animate.css" %>
-        .tagline {
-            height: 200px;
-            width: 400px;
-
+        #tagline {
+            height: 5em;
+            width: 20em;
+            font-size: -webkit-xxx-large;
             position: fixed;
-            top: 50%;
+            top: 40%;
             left: 50%;
             margin-top: -100px;
             margin-left: -200px;
+            color: blanchedalmond;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.5s;
         }
     </style>
     
-    <link rel="stylesheet" href="<%@include file="css/animate.css" %>">
     <%@include file="header.jsp" %>
     <%
         String uri = request.getRequestURI();
@@ -31,5 +35,5 @@
     %>
 </head>
 <body style="background: url('assets/img/talk.png'); background-size: cover;">
-    <div class="animated fadeInDown">Make Things Happen</div>
+    <h1 class="animated fadeInDown delay-1" id="tagline">Make Things Happen</h1>
 </body>

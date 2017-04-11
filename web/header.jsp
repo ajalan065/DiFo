@@ -47,7 +47,7 @@
         <body>
 
 	<div class="my-topnav my-card my-top my-light-grey" id="head">
-    	<a href="index.jsp" ><img src="assets/img/difo.png" alt="DiFo" style="width:70px;height:40px;"></a>
+    	<a href="index.jsp" ><img src="assets/img/difo.png" alt="DiFo" style="width:70px;height:40px; float: left; padding-left: 5px;"></a>
     	<!-- Nav tabs -->
     	<ul class="nav nav-tabs" role="tablist" style="float: right;">
       		<!--<li role="presentation"><a href="index.jsp" aria-controls="home" role="tab" >Home</a></li>-->
@@ -64,7 +64,7 @@
                     else {
                         //out.println("<li><div class='main-nav'><a class='cd-signup' style='background: transparent;'><i class='fa fa-user fa-lg' style='color: darkcyan;'></i></a></div></li>");
                         out.println("<li><div class='dropdown'><a class='dropbtn' onclick='openMenu()' style='border: none;'><i class='fa fa-user fa-lg' style='color: darkcyan;'></i></a>");
-                        out.println("<div class='dropdown-content' id='dropdown-content' style='background: transparent;'>");
+                        out.println("<div class='dropdown-content' id='dropdown-content' style='background: #ECECEA;'>");
                         out.println("<ul>");
                         out.println("<li><a style='padding: 10px 20px; display: block; opacity: 1; border-bottom: 1px solid ghostwhite;' href='edit_profile.jsp'>Edit Profile</a></li>");
                         out.println("<li><a style='padding: 10px 20px; display: block;  opacity: 1; border-bottom: 1px solid ghostwhite;' href='logout.jsp'>Logout</a></li>");
