@@ -77,13 +77,13 @@
             List<List<User>> userRows = null;
             if(userProfiles != null) {
                 userRows = new ArrayList<>();
-                List<User> row = new ArrayList<>();
+                List<User> row = new ArrayList<User>();
                 int count = 0;
                 for (User user : userProfiles) {
                     if(count%4 == 0 && count != 0) {
                         userRows.add(row);
                         row = null;
-                        row = new ArrayList<>();
+                        row = new ArrayList<User>();
                     }
                     row.add(user);
                     count++;
