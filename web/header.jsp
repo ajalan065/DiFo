@@ -1,3 +1,5 @@
+<%@page import="java.nio.file.Paths"%>
+<%@page import="java.io.File"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.lang.*"%>
 <%@page import="java.sql.*"%>
@@ -24,6 +26,8 @@
 	<script src="js/modernizr.js"></script>
         
         <%
+            String session_filePath= Paths.get("assets/img")+File.separator;
+            session.setAttribute("file_path", session_filePath);
             String isLoggedIn = (String)session.getAttribute("isloggedIn");
             String icon=null;
             if(session == null || session.getAttribute("isloggedIn") == null) {
