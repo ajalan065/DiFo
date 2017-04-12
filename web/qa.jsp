@@ -42,20 +42,39 @@
         
         <style type="text/css">
             #question-head {
-                font-size: 20px; 
                 color: #445668; 
-                text-transform: uppercase;
+                margin: 0 0 35px 0; 
+                text-shadow: 0px 1px 0px #f2f2f2;
+            }
+            
+            #question-head  {
+                display: inline-block;
+                
+    text-align: justify;
+                font-size: xx-large;
+    font-family: sans-serif;
+    font-variant: small-caps;
+    font-weight: bolder;
+  width: 100%;
+  margin: 1em;
+            }
+            #answer-start {
+                font-size: xx-large; 
+                color: #445668; 
                 text-align: center; 
                 margin: 0 0 35px 0; 
                 text-shadow: 0px 1px 0px #f2f2f2;
             }
             
+            #answer-body {
+                    font-size: large;
+    font-family: sans-serif;
+    font-weight: 400;
+    text-align: justify;
+            }
+            
             #answer-start {
-                font-size: 20px; 
-                color: #445668; 
-                text-align: center; 
-                margin: 0 0 35px 0; 
-                text-shadow: 0px 1px 0px #f2f2f2;
+                
             }
         </style>
         
@@ -72,7 +91,7 @@
             }
         </script>
     </head>
-    <body  style="background: url('assets/img/talk2.png'); background-size: cover;">
+    <body  style="background: url('assets/img/talk2.png'); background-size: cover; overflow-x: hidden;">
         
         <%@include file="header.jsp" %>
         
@@ -108,19 +127,20 @@
                 <%= question.getHead() %>
             </div>
             
-            <div id="question-body">
+            <div id="question-body" style="padding-left: 2em">
                 <%= question.getBody() %>
             </div>
             
-            <div id="username">
+            <div id="username" style="float: right; padding-right: 6.5em;">
                 <%= question.getUsername() %>
             </div>
+            <br>
             
-            <div id="timestamp">
+            <div id="timestamp" style="float: right;padding-right: 6.5em;">
                 <%= question.getTimestamp() %>
             </div>
         </div>
-        
+            <br><br>
         <div id="answer-start"> Answers </div>
 
         <div id="answers-wrapper">
@@ -128,10 +148,11 @@
                 if(answers != null) {
                     for (Answer answer : answers) {
             %>
-            <div id="answer" >
+            <div id="answer" style="display: block; padding: 2em;">
                 <div id="answer-body"><%= answer.getBody() %></div>
-                <div id="answer-username"><%= answer.getUsername() %></div>
-                <div id="answer-timestamp"><%= answer.getTimestamp() %></div>
+                <div id="answer-username" style="float: right; display: inline; padding-right: 5em;"><%= answer.getUsername() %></div> 
+                <br>
+                <div id="answer-timestamp" style="float: right;  padding-right: 5em;"><%= answer.getTimestamp() %></div>
             </div>
             <%
                     }
@@ -140,10 +161,10 @@
               
         </div>   
         
-        <div id="write-answer">
+        <div id="write-answer" style="bottom: 0; position: fixed; width: 100%; padding-left: 4em; padding-bottom: 1em;">
             <form name="answer-form" action="addanswer.jsp" onsubmit="return add_answer('<%= text%>')" method="post">
-                <input name="answer-body" type="text" id="answer-body" size="100" />
-                <input name="submit_answer" type="submit"  id="submit-answer" value="Answer" />
+                <input name="answer-body" type="text" id="answer-body" size="100" style="width: 85%;"/>
+                <input name="submit_answer" type="submit"  id="submit-answer" value="Answer"  style="width: 5%;"/>
             </form>
         </div>
     </body>
